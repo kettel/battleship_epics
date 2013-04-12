@@ -13,7 +13,7 @@ public class ComputerPlayer extends Player {
 	private static int HORIZONTAL = 1;
 
 	public ComputerPlayer() {
-
+		super(2);
 	}
 
 	@Override
