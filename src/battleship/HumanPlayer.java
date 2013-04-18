@@ -27,9 +27,8 @@ public class HumanPlayer extends Player {
 	}
 	
 	
-
 	@Override
-	public void placeShips(Map map) {
+	public void placeShips(Map map) { //Stycka upp?
 		Scanner scanner = new Scanner(System.in);
 		for (Integer ship : fleet.keySet()) {
 			System.out.println("Placera ut ett skäpp med länden " + ship);

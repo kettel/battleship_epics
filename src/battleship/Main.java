@@ -8,10 +8,10 @@ import battleship.Map.MapSize;
  *  
  * TODO: Make the game follow teh rulez (boats at least placed 1 square away from each other)
  * [X] Create a way to compare two coordinates
- * 		*** Created the isCoordinate functions in coordinate ***
+ * 		*** Created the isCoordinate (better name?) functions in coordinate ***
  * 
  * TODO: Human Player:
- *	[X] Draw player entered ship on board. Kinda started.
+ *	[X] Draw player entered ship on board.
  * 	TODO: Make a move
   	* 	TODO: Handle collisions..
  * 		TODO: Basic textinput 
