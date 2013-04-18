@@ -19,5 +19,10 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+	public boolean isCoordinate(int a,int b){
+		if (this.x == a && this.y==b){
+			return true;	
+		}
+		return false;
+	}
 }

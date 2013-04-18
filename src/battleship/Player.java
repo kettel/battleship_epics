@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
+
 public abstract class Player {
 	protected HashMap<Integer, HashSet<Coordinate>> fleet = new HashMap<Integer, HashSet<Coordinate>>();
 	public static class FleetType {
@@ -11,6 +12,7 @@ public abstract class Player {
 	}
 
 	public Player(int type) {
+		
 	}
 	
 	public HashSet<Coordinate> getCoordinates(){

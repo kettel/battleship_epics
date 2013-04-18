@@ -3,9 +3,15 @@ package battleship;
 import java.util.HashSet;
 import java.util.Scanner;
 
+/**
+ * Human player. Should mainly have methods for taking input from player and printing out the effects.
+ * @author Victor
+ *
+ */
 public class HumanPlayer extends Player {
 	private static int VERTICAL = 0;
 	private static int HORIZONTAL = 1;
+
 
 	public HumanPlayer() {
 		super(FleetType.CLASSIC);
@@ -29,22 +35,26 @@ public class HumanPlayer extends Player {
 			String[] start = input.split(",");
 			Coordinate startCoordinate = new Coordinate(
 					Integer.parseInt(start[0]), Integer.parseInt(start[1]));
-			System.out.println("Ange riktning: ");
+			System.out.println("Ange riktning, ");
+			System.out.println("Horisontal = 1, vertikal = 0:");
 			input = scanner.nextLine();
 			input.split(",");
 			if (Integer.parseInt(input) == HORIZONTAL) {
 				for (int i = 0; i < ship; i++) {
 					fleet.get(ship).add(
 							new Coordinate(i, startCoordinate.getY()));
+					map.setSquare(i, startCoordinate.getY());
 				}
 			} else if (Integer.parseInt(input) == VERTICAL) {
 				for (int i = 0; i < ship; i++) {
 					fleet.get(ship).add(
 							new Coordinate(startCoordinate.getX(), i));
+					map.setSquare(startCoordinate.getX(),i);
 				}
 			} else {
 				System.out.println("unknown input");
 			}
+			map.drawMap(map.getMap(), getCoordinates());
 		}
 		
 		map.drawMap(map.getMap(), getCoordinates());

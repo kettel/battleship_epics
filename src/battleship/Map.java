@@ -8,6 +8,7 @@ import java.util.Iterator;
 public class Map {
 	
 	private char[][] map;
+	boolean squareIsHit;
 	
 	public static class MapSize {
 		public static int LARGE = 10;
@@ -32,37 +33,11 @@ public class Map {
 		
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map.length; j++) {
-				
-				
-				if (fleetCoordinates.contains(new Coordinate(i, j))) {
-					System.out.print("|*");
-				} else {
-					System.out.print("|"+map[i][j]);
-				}
-				
+				System.out.print("|"+map[i][j]);
 			}
 			System.out.println("|");
 		}
 	}
-//	public void drawMap(Player p){
-//		Collection<HashSet<Coordinate>> fleetCoords = p.getCoordset();
-//		
-//		
-//		for (int i = 0; i < map.length; i++) {
-//			for (int j = 0; j < map.length; j++) {
-//				System.out.print("|");
-//				//ifsats... typ
-//				if(fleetCoords.getCoordinate(i,j)==true){
-//					
-//				}
-//				else{
-//					
-//				}
-//				//slut
-//			}
-//			System.out.println("|");
-//		}
-//	}
 
 	private char[][] createMap(int size) {
 		char[][] map = new char[10][10];
@@ -73,5 +48,12 @@ public class Map {
 			
 		}
 		return map;
+	}
+	/**
+	 * Set a square on the map to be either taken *
+	 *
+	 */
+	public void setSquare(int i, int j){
+		map[i][j] = '*';
 	}
 }
