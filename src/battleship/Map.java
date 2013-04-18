@@ -24,14 +24,28 @@ public class Map {
 	public char[][] getMap(){
 		return map;
 	}
+	
+	/**
+	 * draws the map in the console
+	 * @param map
+	 * @param fleetCoordinates
+	 */
 	public void drawMap(char[][] map,HashSet<Coordinate> fleetCoordinates) {
 		
-		
+		//TODO: For bugcheck - prints the coordinates that's in the fleet
 		for (Coordinate coordinate : fleetCoordinates) {
 					System.out.println(coordinate.getX() +","+ coordinate.getY());
 				}
 		
+		System.out.println("x\\y");
+		System.out.print(" ");
+		for (int i =0; i < map.length;i++) {
+			System.out.print(" "+i);
+		}
+		System.out.println();
+		
 		for (int i = 0; i < map.length; i++) {
+			System.out.print(i);
 			for (int j = 0; j < map.length; j++) {
 				System.out.print("|"+map[i][j]);
 			}
@@ -50,10 +64,10 @@ public class Map {
 		return map;
 	}
 	/**
-	 * Set a square on the map to be either taken *
+	 * Set a square on the map to be taken #
 	 *
 	 */
-	public void setSquare(int i, int j){
-		map[i][j] = '*';
+	public void setSquareTaken(int i, int j){
+		map[i][j] = '#';
 	}
 }

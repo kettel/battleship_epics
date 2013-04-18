@@ -3,6 +3,7 @@ package battleship;
 public class Coordinate {
 	private int x;
 	private int y;
+
 	public Coordinate(int x,int y) {
 		this.x=x;
 		this.y=y;
@@ -19,10 +20,23 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
+	/**
+	 * Compares a set of two ints to the x and y coordinates of this coordinte
+	 * @param a
+	 * @param b
+	 * @return true if x = a and y = b.
+	 */
 	public boolean isCoordinate(int a,int b){
-		if (this.x == a && this.y==b){
-			return true;	
-		}
-		return false;
+		return(this.getX() == a && this.getY()==b);
+		
+	}
+
+	/**
+	 * Compares another coordinate with this one
+	 * @param Coordinate c
+	 * @return true if they are the same, false if they're not.
+	 */
+	public boolean isCoordinate(Coordinate c){
+		return(isCoordinate(c.getX(),c.getY()));
 	}
 }
