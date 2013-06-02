@@ -64,10 +64,30 @@ public class Map {
 		return map;
 	}
 	/**
-	 * Set a square on the map to be taken #
-	 *
+	 * Set a square on the map to be taken (as #). Should not be called upon without checking weather the squares are occupied before.
 	 */
 	public void setSquareTaken(int i, int j){
+		
 		map[i][j] = '#';
+		
+		if(i>0){
+			setNeigbour(i-1, j);
+		}
+		if(i<map.length){
+			setNeigbour(i+1, j);
+		}
+		if(j>0){
+			setNeigbour(i, j-1);
+		}
+		if(j<map.length){
+			setNeigbour(i, j+1);
+		}
+		
+		
+	}
+	private void setNeigbour(int i, int j){
+		if (map[i][j] != '#'){
+			map[i][j] = 'o';
+		}
 	}
 }

@@ -38,7 +38,10 @@ public abstract class Player {
 	 */
 	private boolean checkIfHit(Coordinate c){
 		for (Integer ship : fleet.keySet()) {
-			return fleet.get(ship).contains(c);
+			if (fleet.get(ship).contains(c)){
+				return true;
+			}
+			
 		}
 		return false;
 	}

@@ -42,12 +42,14 @@ public class HumanPlayer extends Player {
 			input = scanner.nextLine();
 			input.split(",");
 			if (Integer.parseInt(input) == HORIZONTAL) {
+				/*Insert check if ship can be placed*/
 				for (int i = 0; i < ship; i++) {
 					fleet.get(ship).add(
 							new Coordinate(i, startCoordinate.getY()));
 					map.setSquareTaken(i, startCoordinate.getY());
 				}
 			} else if (Integer.parseInt(input) == VERTICAL) {
+				/*Insert check if ship can be placed*/
 				for (int i = 0; i < ship; i++) {
 					fleet.get(ship).add(
 							new Coordinate(startCoordinate.getX(), i));
@@ -62,6 +64,11 @@ public class HumanPlayer extends Player {
 		map.drawMap(map.getMap(), getCoordinates());
 		
 		scanner.close();
+	}
+	
+	private HashSet<Coordinate> canPlace(int direction, int length, Map map){
+		
+		return null;
 	}
 
 }
