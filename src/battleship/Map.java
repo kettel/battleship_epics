@@ -103,8 +103,12 @@ public class Map {
 	 * @param the coordinate
 	 */
 	private void setNeigbour(int i, int j){
-		if (map[i][j] != '#'){
-			map[i][j] = 'o';
+		if(i<map.length & i>=0){
+			if(j<map.length & j>=0){
+				if (map[i][j] != '#'){
+				map[i][j] = 'o';
+				}
+			}
 		}
 	}
 	
@@ -145,10 +149,10 @@ public class Map {
 	 * @return
 	 */
 	private boolean ifSquareFree(int x, int y){
-		if(x<=0 || x>=map.length){//if x out of bounds
+		if(x<0 || x>map.length){//if x out of bounds
 			return false;
 		}
-		if(y<=0 || y>= map.length){//if y out of bounds
+		if(y<0 || y> map.length){//if y out of bounds
 			return false;
 		}
 		if(map[x][y]=='o' || map[x][y]=='#'){//if (x,y) not free 

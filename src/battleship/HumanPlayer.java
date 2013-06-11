@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class HumanPlayer extends Player {
 	private static int VERTICAL = 0;
 	private static int HORIZONTAL = 1;
+	boolean isPlaced;
 
 
 
@@ -33,18 +34,26 @@ public class HumanPlayer extends Player {
 		Scanner scanner = new Scanner(System.in);
 		
 		for (Integer ship : fleet.keySet()) {
-			/*insert loop that loops while shipplacement isn't correct*/
-			System.out.println("Placera ut ett skŠpp med lŠnden " + ship);
-			System.out.println("Ange startpunkt enligt formatet (x,y): ");
-			String input = scanner.nextLine();
-			String[] start = input.split(",");
-			Coordinate startCoordinate = new Coordinate(
-					Integer.parseInt(start[0]), Integer.parseInt(start[1]));
-			System.out.println("Ange riktning, ");
-			System.out.println("Horisontal (åt höger från startpunkten) = 1, vertikal (placering nedåt från startpunkten) = 0:");
-			input = scanner.nextLine();
-			input.split(",");
-			if (Integer.parseInt(input) == VERTICAL) {
+			isPlaced=false;
+			while(isPlaced == false){
+				System.out.println("Placera ut ett skŠpp med lŠnden " + ship);
+				System.out.println("Ange startpunkt enligt formatet (x,y): ");
+				String input = scanner.nextLine();
+				String[] start = input.split(",");
+				Coordinate startCoordinate = new Coordinate(
+						Integer.parseInt(start[0]), Integer.parseInt(start[1]));
+				System.out.println("Ange riktning, ");
+				System.out.println("Horisontal (åt höger från startpunkten) = 1, vertikal (placering nedåt från startpunkten) = 0:");
+				
+				input = scanner.nextLine();
+				input.split(",");
+				
+				isPlaced=checkAndPlace(map, ship, startCoordinate, Integer.parseInt(input));
+			}
+			
+			
+			
+			/*if (Integer.parseInt(input) == VERTICAL) {
 				map.checkIfPlacable(startCoordinate, VERTICAL, ship);
 				
 				for (int i = 0; i < ship; i++) {
@@ -53,7 +62,7 @@ public class HumanPlayer extends Player {
 					map.setSquareTaken(i, startCoordinate.getY());
 				}
 			} else if (Integer.parseInt(input) == HORIZONTAL) {
-				/*Insert check if ship can be placed*/
+			
 				map.checkIfPlacable(startCoordinate, HORIZONTAL, ship);
 				for (int i = 0; i < ship; i++) {
 					fleet.get(ship).add(
@@ -62,7 +71,7 @@ public class HumanPlayer extends Player {
 				}
 			} else {
 				System.out.println("unknown input");
-			}
+			}*/
 			map.drawMap(map.getMap(), getCoordinates());
 		}
 		
