@@ -28,8 +28,13 @@ public class HumanPlayer extends Player {
 	
 	
 	@Override
+	/**
+	 * Given input from the user, checks if the placement of the ships are ok.
+	 * If yes places them, otherwise aske the user to place them again. 
+	 */
 	public void placeShips(Map map) { //Stycka upp?
 		Scanner scanner = new Scanner(System.in);
+		
 		for (Integer ship : fleet.keySet()) {
 			System.out.println("Placera ut ett skäpp med länden " + ship);
 			System.out.println("Ange startpunkt enligt formatet (x,y): ");
