@@ -152,10 +152,10 @@ public class Map {
 	 * @return
 	 */
 	private boolean ifSquareFree(int x, int y){
-		if(x<0 || x>map.length){//if x out of bounds
+		if(x<0 || x>=map.length){//if x out of bounds
 			return false;
 		}
-		if(y<0 || y> map.length){//if y out of bounds
+		if(y<0 || y>= map.length){//if y out of bounds
 			return false;
 		}
 		if(map[x][y]=='o' || map[x][y]=='#'){//if (x,y) not free 
