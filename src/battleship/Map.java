@@ -52,7 +52,7 @@ public class Map {
 					System.out.println(coordinate.getX() +","+ coordinate.getY());
 				}*/
 		
-		System.out.println("x\\y");
+		System.out.println("y\\x");
 		System.out.print(" ");
 		for (int i =0; i < map.length;i++) {
 			System.out.print(" "+i);
