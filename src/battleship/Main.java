@@ -49,13 +49,17 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Map map=new Map(MapSize.LARGE);
+		Map humanMap=new Map(MapSize.LARGE);
+		Map computerMap=new Map(MapSize.LARGE);
 		
 		//TODO: Do we need a PLAYER object in the player object...
 		//		seems kinda redundant. Or should we just create the players as
 		//		humans or computers? (like below)
-		HumanPlayer humanPlayer=new HumanPlayer();
-		humanPlayer.placeShips(map);
+		//HumanPlayer humanPlayer=new HumanPlayer();
+		//humanPlayer.placeShips(humanMap);
+		
+		ComputerPlayer computerPlayer = new ComputerPlayer();
+		computerPlayer.placeShips(computerMap);
 	}
 
 }

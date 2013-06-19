@@ -12,14 +12,15 @@ import java.util.HashSet;
  * With ship = X
  * Empty square = ~
  * 
- * @author Victor
+ * @author Victor, Wiktor
  *
  */
 public class Map {
 	
-	private int i; //for loops
-
-
+	private int i; //for loops, (Kettel: Redundant?)
+	private int size; // for getting current mapsize
+	
+	
 	// the drawable map, contain the symbols representing the object in the squares 
 	private char[][] map;
 	//boolean squareIsHit;
@@ -75,8 +76,10 @@ public class Map {
 			}
 			
 		}
+		this.size = size;
 		return map;
 	}
+	
 	/**
 	 * Set a square on the map to be taken (as #). Should not be called upon without checking weather the squares are occupied before.
 	 */
@@ -160,5 +163,13 @@ public class Map {
 		}
 		//else
 		return true; 
+	}
+	
+	/**
+	 * returns the size of current map
+	 * @return
+	 */
+	public int getSize() {
+		return size;
 	}
 }

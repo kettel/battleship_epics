@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Human player. Should mainly have methods for taking input from player and printing the effects of moves n' stuff.
- * @author Victor
+ * @author Victor, Wiktor
  *
  */
 public class HumanPlayer extends Player {
@@ -18,9 +18,12 @@ public class HumanPlayer extends Player {
 	public HumanPlayer() {
 		//TODO: should this be in Player? (Cause I presume its the same for all players)
 		super(FleetType.CLASSIC);
-		fleet.put(2, new HashSet<Coordinate>());
 		
-		fleet.put(3, new HashSet<Coordinate>());
+		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
+		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser
+		//fleet.put(3, new HashSet<Coordinate>()); // Submarine
+		//fleet.put(4, new HashSet<Coordinate>()); // Battleship
+		//fleet.put(5, new HashSet<Coordinate>()); // Aircraft carrier
 	}
 
 	@Override
@@ -30,25 +33,26 @@ public class HumanPlayer extends Player {
 	
 	
 	@Override
-	public void placeShips(Map map) { //Stycka upp? Vill troligtvis placera delar i map - hur gör vi det?
+	public void placeShips(Map map) { //Stycka upp? Vill troligtvis placera delar i map - hur gï¿½r vi det?
 		Scanner scanner = new Scanner(System.in);
 		
 		for (Integer ship : fleet.keySet()) {
 			isPlaced=false;
 			while(isPlaced == false){
-				System.out.println("Placera ut ett skŠpp med lŠnden " + ship);
+				System.out.println("Placera ut ett skepp med lÃ¤ngden " + ship);
 				System.out.println("Ange startpunkt enligt formatet (x,y): ");
 				String input = scanner.nextLine();
 				String[] start = input.split(",");
 				Coordinate startCoordinate = new Coordinate(
 						Integer.parseInt(start[0]), Integer.parseInt(start[1]));
 				System.out.println("Ange riktning, ");
-				System.out.println("Horisontal (åt höger från startpunkten) = 1, vertikal (placering nedåt från startpunkten) = 0:");
+				System.out.println("Horisontal (Ã¥t hÃ¶ger frÃ¥n startpunkten) = 1, vertikal (placering nedÃ¥t frÃ¥n startpunkten) = 0:");
 				
 				input = scanner.nextLine();
 				input.split(",");
 				
 				isPlaced=checkAndPlace(map, ship, startCoordinate, Integer.parseInt(input));
+				
 			}
 			
 			
