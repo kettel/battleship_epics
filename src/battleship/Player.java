@@ -63,7 +63,7 @@ public abstract class Player {
 	 * Fire a shot at a given coordinate. Human and computer uses different methods of doing so.
 	 * @param c
 	 */
-	public abstract void makeMove(Coordinate c);
+	public abstract void makeMove(Coordinate c, Map map);
 	/**
 	 * Places the ships on the map. Human and computer uses different methods of doing so.
 	 * @param map
@@ -103,4 +103,6 @@ public abstract class Player {
 		}
 		return false;
 	}
+
+	
 }

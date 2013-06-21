@@ -27,7 +27,7 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public void makeMove(Coordinate c) {
+	public void makeMove(Coordinate c, Map map) {
 		
 	}
 	
@@ -55,27 +55,6 @@ public class HumanPlayer extends Player {
 				
 			}
 			
-			
-			
-			/*if (Integer.parseInt(input) == VERTICAL) {
-				map.checkIfPlacable(startCoordinate, VERTICAL, ship);
-				
-				for (int i = 0; i < ship; i++) {
-					fleet.get(ship).add(
-							new Coordinate(i, startCoordinate.getY()));
-					map.setSquareTaken(i, startCoordinate.getY());
-				}
-			} else if (Integer.parseInt(input) == HORIZONTAL) {
-			
-				map.checkIfPlacable(startCoordinate, HORIZONTAL, ship);
-				for (int i = 0; i < ship; i++) {
-					fleet.get(ship).add(
-							new Coordinate(startCoordinate.getX(), i));
-					map.setSquareTaken(startCoordinate.getX(),i);
-				}
-			} else {
-				System.out.println("unknown input");
-			}*/
 			map.drawMap(map.getMap(), getCoordinates());
 		}
 		
