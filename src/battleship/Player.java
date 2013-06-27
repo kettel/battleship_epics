@@ -18,7 +18,7 @@ public abstract class Player {
 
 	/**
 	 *  
-	 * @param type
+	 * @param type - TODO: vad gör den?
 	 */
 	public Player(int type) {		
 	}
@@ -47,7 +47,7 @@ public abstract class Player {
 	/**
 	 * Compares the coordinates of the shot with all coordinates of the fleet. If it's a hit - remove the ship from the fleet.
 	 * @param c
-	 * @return true if the fleet is empty - all ships has been sunk.
+	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
 	 */
 	private boolean setHit(Coordinate c){
 		for (Integer ship : fleet.keySet()) {
@@ -89,7 +89,7 @@ public abstract class Player {
 			for (int i = 0; i < ship; i++) {
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
-				map.setSquareTaken(startCoordinate.getX()+i, startCoordinate.getY());
+				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
 			}
 			return true;
 		}
@@ -97,7 +97,7 @@ public abstract class Player {
 			for (int i = 0; i < ship; i++) {
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
-				map.setSquareTaken(startCoordinate.getX(),startCoordinate.getY()+i);
+				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
 			}
 			return true;
 		}

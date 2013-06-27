@@ -13,20 +13,21 @@ import battleship.Map.MapSize;
  * TODO: Human Player:
  *	[X] Draw player entered ship on board.
  * 	TODO: Make a move
-  	* 	TODO: Handle collisions..
- * 		TODO: Basic textinput 
- * 			TODO: Advanced placement w keyarrows
+  	* 	TODO: Handle collisions (what did we mean - same player hitting on the same square or something?)
+ * 		TODO: Basic textinput (x,y)
+ * 			(TODO: Advanced placement w keyarrows)
  * 	  	TODO: Make support for another human player
  * 
  * TODO: Computer player.
  * 	TODO: Place ships.
- * 	TODO: Make a move
+ * 	TODO: Make a move (pure random, peeking or something with memory?)
  * 
  * TODO: Create a functioning game-loop ((preferably one that can be used both locally and over intewebs))
  * 
  * TODO: Determine winner.
  * TODO: Count misses
  * TODO: Count hits.
+ * 	(Keep track of number of # hits and # turns? )
  * 
  * TODO: Design
  *	TODO: Make UML

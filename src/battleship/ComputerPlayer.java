@@ -31,7 +31,7 @@ public class ComputerPlayer extends Player {
 	}
 
 	@Override
-	public void makeMove(Coordinate c) {
+	public void makeMove(Coordinate c, Map map) {
 
 	}
 
@@ -44,7 +44,7 @@ public class ComputerPlayer extends Player {
 				
 				// Random placement
 				for (int i =0; i< 2; i++) {
-					// Generate a random number in the range [1,map.getSize()-1]
+					// Generate a random number in the range [0,map.getSize()-1]
 					
 					start[i] = 0 + (int)(Math.random()*map.getSize()-1);
 				}

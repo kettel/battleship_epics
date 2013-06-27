@@ -57,9 +57,7 @@ public class HumanPlayer extends Player {
 			
 			map.drawMap(map.getMap(), getCoordinates());
 		}
-		
-		//map.drawMap(map.getMap(), getCoordinates());
-		
+				
 		scanner.close();
 	}
 }

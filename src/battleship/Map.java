@@ -7,7 +7,7 @@ import java.util.HashSet;
  * Symbols;
  * Empty square = _
  * Ship = #
- * Square adjacent to ship = o (should be removed right before start - used for ship-placement)
+ * Square adjacent to ship = o (should be removed right before start - used for ship-placement 'n checks)
  * Hit squares:
  * With ship = X
  * Empty square = ~
@@ -17,7 +17,6 @@ import java.util.HashSet;
  */
 public class Map {
 	
-	private int i; //for loops, (Kettel: Redundant?)
 	private int size; // for getting current mapsize
 	
 	
@@ -68,25 +67,29 @@ public class Map {
 		}
 	}
 
+	/**
+	 * Create the map matrix with specific size. All fields are initially filled with '_'
+	 * @param size of the map (lenght of the sides)
+	 * @return
+	 */
 	private char[][] createMap(int size) {
 		char[][] map = new char[10][10];
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map.length; j++) {
 				map[i][j] = '_';
 			}
-			
 		}
 		this.size = size;
 		return map;
 	}
 	
 	/**
-	 * Set a square on the map to be taken (as #). Should not be called upon without checking weather the squares are occupied before.
+	 * Set a ship part on a square (as #) and calls setNeighbour for its neighbors. Should not be called upon without checking weather the squares are occupied beforehand.
 	 */
-	public void setSquareTaken(int i, int j){
-		
+	public void setShipOnSquare(int i, int j){
+		//The square
 		map[i][j] = '#';
-		
+		//The neihgbours
 		if(i>0){
 			setNeigbour(i-1, j);
 		}
@@ -125,7 +128,7 @@ public class Map {
 	public boolean checkIfPlacable(Coordinate c, int direction, int length){
 		
 		if(direction == 0){ /*horizontal*/
-			for (i = 0; i < length; i++) {
+			for (int i = 0; i < length; i++) {
 				if (!ifSquareFree(c.getX()+i, c.getY())) {
 					return false;
 				}	
@@ -133,7 +136,7 @@ public class Map {
 			return true;
 		}
 		if(direction == 1){ /*vertical*/
-			for (i = 0; i < length; i++) {
+			for (int i = 0; i < length; i++) {
 				if (!ifSquareFree(c.getX(), c.getY()+i)) {
 					return false;
 				}	
