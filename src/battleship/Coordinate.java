@@ -1,13 +1,20 @@
 package battleship;
-
+/**
+ * The Coordinates of the map, used to store the coordinates of ships
+ * @author Victor,Wiktor
+ *
+ */
 public class Coordinate {
 	private int x;
 	private int y;
 
+	//constructor
 	public Coordinate(int x,int y) {
 		this.x=x;
 		this.y=y;
 	}
+	
+	//getters and setters
 	public int getX() {
 		return x;
 	}
@@ -20,6 +27,7 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
 	/**
 	 * Compares a set of two ints to the x and y coordinates of this coordinte
 	 * @param a

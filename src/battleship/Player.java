@@ -7,7 +7,7 @@ import java.util.HashSet;
  * The super player-class. Should be concerned with "behind the scenes"-stuff.
  * Check if placement is valid, check if a ship is hit or not, independent of where the coordinates came from.
  *  
- * @author Victor
+ * @author Victor, Wiktor
  *
  */
 public abstract class Player {
@@ -60,10 +60,11 @@ public abstract class Player {
 	}
 
 	/**
-	 * Fire a shot at a given coordinate. Human and computer uses different methods of doing so.
-	 * @param c
+	 * Fire a shot at a given coordinate. Human and computer uses different methods of generating the coordinate.
+	 * @param c, map
 	 */
 	public abstract void makeMove(Coordinate c, Map map);
+	
 	/**
 	 * Places the ships on the map. Human and computer uses different methods of doing so.
 	 * @param map
@@ -77,14 +78,16 @@ public abstract class Player {
 	 * @param ship - the length of the ship
 	 * @param startCoordinate - starting point
 	 * @param direction - 0=vertical, 1=horizontal
-	 * @return
+	 * @return true if the ship was placed, false if it could not be placed.
 	 */
 	public boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
 
+		//Check if square and direction is placable
 		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
 			return false;
 		}
 		
+		//place the ship with the given parameters
 		if(direction == 0){
 			for (int i = 0; i < ship; i++) {
 				fleet.get(ship).add(

@@ -4,13 +4,13 @@ import java.util.HashSet;
 
 /**
  * The map-object. Contain a size^2 matrix with chars representing the objects on the map.
- * Symbols;
+ * Lathund;
  * Empty square = _
  * Ship = #
- * Square adjacent to ship = o (should be removed right before start - used for ship-placement 'n checks)
+ * Square adjacent to ship = o (should be removed right before start - used for ship-placement 'n checks before the game)
  * Hit squares:
- * With ship = X
- * Empty square = ~
+ * With ship/sunken ship = X
+ * Empty square/miss = ~
  * 
  * @author Victor, Wiktor
  *
@@ -22,7 +22,6 @@ public class Map {
 	
 	// the drawable map, contain the symbols representing the object in the squares 
 	private char[][] map;
-	//boolean squareIsHit;
 	
 	public static class MapSize {
 		public static int LARGE = 10;
@@ -46,7 +45,7 @@ public class Map {
 	 */
 	public void drawMap(char[][] map,HashSet<Coordinate> fleetCoordinates) {
 		
-		//TODO: For bugcheck - prints the coordinates that's in the fleet
+		// For bugchecking - the /*[stuff]*/-part prints the coordinates that's in the fleet
 		/*for (Coordinate coordinate : fleetCoordinates) {
 					System.out.println(coordinate.getX() +","+ coordinate.getY());
 				}*/

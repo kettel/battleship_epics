@@ -2,7 +2,7 @@ package battleship;
 
 import battleship.Map.MapSize;
 
-/**
+/*
  * Minimum:
  * TODO: Comment. Oh THE COMMENT!
  *  
@@ -13,7 +13,7 @@ import battleship.Map.MapSize;
  * TODO: Human Player:
  *	[X] Draw player entered ship on board.
  * 	TODO: Make a move
-  	* 	TODO: Handle collisions (what did we mean - same player hitting on the same square or something?)
+  	* 	TODO: Handle collisions (what did we mean - same player hitting on the same square twice or something?)
  * 		TODO: Basic textinput (x,y)
  * 			(TODO: Advanced placement w keyarrows)
  * 	  	TODO: Make support for another human player
@@ -44,6 +44,14 @@ import battleship.Map.MapSize;
  * 	TODO: Tweak the drawing of game board for better placements.
 
  */
+
+
+/**
+ * Battleship, the game based on the movie with the same name.
+ * 
+ * @author Victor,Wiktor
+ *
+ */
 public class Main {
 
 	/**
@@ -56,11 +64,17 @@ public class Main {
 		//TODO: Do we need a PLAYER object in the player object...
 		//		seems kinda redundant. Or should we just create the players as
 		//		humans or computers? (like below)
+		//TODO: fixed?
 		//HumanPlayer humanPlayer=new HumanPlayer();
 		//humanPlayer.placeShips(humanMap);
 		
-		ComputerPlayer computerPlayer = new ComputerPlayer();
-		computerPlayer.placeShips(computerMap);
+		ComputerPlayer computer = new ComputerPlayer();
+		computer.placeShips(computerMap);
+		
+		HumanPlayer human = new HumanPlayer();
+		human.placeShips(humanMap);
+		
+		
 	}
 
 }
