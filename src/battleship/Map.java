@@ -5,7 +5,7 @@ import java.util.HashSet;
 /**
  * The map-object. Contain a size^2 matrix with chars representing the objects on the map.
  * Lathund;
- * Empty square = _
+ * Empty/unexplored square = _
  * Ship = #
  * Square adjacent to ship = o (should be removed right before start - used for ship-placement 'n checks before the game)
  * Hit squares:
@@ -178,7 +178,7 @@ public class Map {
 	}
 	
 	/**
-	 * Sets the map to be ready for the game by removing the "neighbour"-symbols (o:s) from the map 
+	 * Sets the map to be ready for the game by removing the "neighbor"-symbols (o:s) from the map 
 	 */
 	public void setForPlay(){
 		for (int x = 0; x < map.length; x++) {

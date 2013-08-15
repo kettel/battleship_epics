@@ -17,8 +17,8 @@ public abstract class Player {
 	}
 
 	/**
-	 *  
-	 * @param type - TODO: vad gör den?
+	 *  Constructor
+	 * @param type - TODO: vad gör den
 	 */
 	public Player(int type) {		
 	}
@@ -37,9 +37,18 @@ public abstract class Player {
 	 */
 	private boolean checkIfHit(Coordinate c){
 		for (Integer ship : fleet.keySet()) {
+			
+			for(Coordinate coordinate : fleet.get(ship)){
+				if(c.isCoordinate(coordinate)){
+					return true;
+				}
+			}
+			
+			/*
 			if (fleet.get(ship).contains(c)){
 				return true;
 			}
+			*/
 			
 		}
 		return false;

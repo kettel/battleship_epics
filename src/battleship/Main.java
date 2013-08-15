@@ -6,9 +6,17 @@ import battleship.Map.MapSize;
  * Minimum:
  * TODO: Comment. Oh THE COMMENT!
  *  
- * TODO: Make the game follow teh rulez (boats at least placed 1 square away from each other)
+ * TODO: Make the game follow teh rulez
+ * [X] boats at least placed 1 square away from each other - fixed for human and computer alike
  * [X] Create a way to compare two coordinates
  * 		*** Created the isCoordinate (better name?) functions in coordinate ***
+ * TODO: more rules?
+ * 
+ * TODO: super: Player
+ * [X] draw board for players
+ * TODO: Make move - a super one - should probably be the same for both human and computer
+ * 
+ * 
  * 
  * TODO: Human Player:
  *	[X] Draw player entered ship on board.
@@ -19,7 +27,8 @@ import battleship.Map.MapSize;
  * 	  	TODO: Make support for another human player
  * 
  * TODO: Computer player.
- * 	TODO: Place ships.
+ * 	[X] Place ships (random)
+ * 
  * 	TODO: Make a move (pure random, peeking or something with memory?)
  * 
  * TODO: Create a functioning game-loop ((preferably one that can be used both locally and over intewebs))
