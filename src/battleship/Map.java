@@ -39,16 +39,18 @@ public class Map {
 	}
 	
 	/**
-	 * draws the map in the console
-	 * @param map
-	 * @param fleetCoordinates
+	 * draws the ascii representation of the map in the console
+	 * 
+	 * TODO: Removed the in-parameters of this function. fleetCoordinates weren't used and the class already has access to its map.
+	 * 		Leaved them there as comments if we wanted them later. 
 	 */
-	public void drawMap(char[][] map,HashSet<Coordinate> fleetCoordinates) {
+	public void drawMap(/*char[][] map,HashSet<Coordinate> fleetCoordinates*/) {
 		
-		// For bugchecking - the /*[stuff]*/-part prints the coordinates that's in the fleet
+		// For bugchecking - the loop-part below prints the coordinates that's in the fleet
 		/*for (Coordinate coordinate : fleetCoordinates) {
 					System.out.println(coordinate.getX() +","+ coordinate.getY());
 				}*/
+		
 		
 		System.out.println("y\\x");
 		System.out.print(" ");
@@ -173,5 +175,18 @@ public class Map {
 	 */
 	public int getSize() {
 		return size;
+	}
+	
+	/**
+	 * Sets the map to be ready for the game by removing the "neighbour"-symbols (o:s) from the map 
+	 */
+	public void setForPlay(){
+		for (int x = 0; x < map.length; x++) {
+			for (int y = 0; y < map.length; y++) {
+				if(map[x][y] == 'o'){
+					map[x][y] = '_';
+				}
+			}
+		}
 	}
 }

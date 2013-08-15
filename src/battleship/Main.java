@@ -70,10 +70,13 @@ public class Main {
 		
 		ComputerPlayer computer = new ComputerPlayer();
 		computer.placeShips(computerMap);
+		computerMap.setForPlay();
+		computerMap.drawMap();
 		
 		HumanPlayer human = new HumanPlayer();
 		human.placeShips(humanMap);
-		
+		humanMap.setForPlay();
+		humanMap.drawMap();
 		
 	}
 
