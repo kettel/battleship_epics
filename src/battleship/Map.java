@@ -180,6 +180,35 @@ public class Map {
 	}
 	
 	/**
+	 * return true if (x,y) on the map and map[x][y] has not been hit before 
+	 * @param x - the x-coordinate
+	 * @param y - the y-coordinate
+	 * @return true if move is valid
+	 */
+	private boolean isSquareNotHit(int x, int y){
+		if(x<0 || x>=map.length){//if x out of bounds
+			return false;
+		}
+		if(y<0 || y>= map.length){//if y out of bounds
+			return false;
+		}
+		if(map[x][y]=='~' || map[x][y]=='X'){//if (x,y) has been hit already
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * returns true if the give coordinate is on the board and not hit before.
+	 * @param c - the coordinate
+	 * @return true if the coordinate is a valid move and has not been hit before
+	 */
+	public boolean isSquareNotHit(Coordinate c){
+		return isSquareNotHit(c.getX(), c.getY());
+	}
+	
+	/**
 	 * returns the size of current map
 	 * @return
 	 */
