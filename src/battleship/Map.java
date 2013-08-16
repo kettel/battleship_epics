@@ -22,7 +22,7 @@ public class Map {
 	private char[][] map;
 	
 	/**
-	 * TODO: Should this be used for something?
+	 * TODO: Is/Should this be used for something?
 	 * @author Victor,Wiktor
 	 *
 	 */
@@ -47,14 +47,14 @@ public class Map {
 	/**
 	 * Draw the ascii representation of THIS map in the console. Same as "map.drawMap(map.getMap());"
 	 */
-	public void drawMap(){
-		drawMap(this.map);
+	public void drawSetupMap(){
+		drawSetupMap(this.map);
 	}
 	
 	/**
 	 * draws the ascii representation of a given map in the console
 	 */
-	public void drawMap(char[][] map/*,HashSet<Coordinate> fleetCoordinates*/) {
+	public void drawSetupMap(char[][] map/*,HashSet<Coordinate> fleetCoordinates*/) {
 		
 		// For bugchecking - the loop-part below prints the coordinates that's in the fleet
 		/*for (Coordinate coordinate : fleetCoordinates) {
@@ -73,6 +73,55 @@ public class Map {
 			System.out.print(i);
 			for (int j = 0; j < map.length; j++) {
 				System.out.print("|"+map[i][j]);
+			}
+			System.out.println("|");
+		}
+	}
+	
+	/**
+	 * Draw the in-game ascii representation of this map as an opponent should see it.
+	 */
+	public void drawGameMap(){
+		drawGameMap(this.map);
+	}
+	
+	/**
+	 * Draws the in-game ascii representation of the given map as an opponent should see it.
+	 * @param map
+	 */
+	public void drawGameMap(char[][] map) {
+	
+		System.out.println("y\\x");
+		System.out.print(" ");
+		for (int i =0; i < map.length;i++) {
+			System.out.print(" "+i);
+		}
+		System.out.println();
+		
+		for (int i = 0; i < map.length; i++) {
+			System.out.print(i);
+			for (int j = 0; j < map.length; j++) {
+				System.out.print("|");
+				switch (map[i][j]) {
+				case '_': //if unexplored, empty square
+					System.out.print('_');
+					break;
+				case '#': //if unexplored square with ship
+					System.out.print('_');
+					break;
+				case  'o'://if unexplored, empty square adjacent to ship
+					System.out.print('_');
+					break;
+				case '~': //if explored empty square
+					System.out.print('~');
+					break;
+				case 'X': //if explored square with (sunken) ship
+					System.out.print('X');
+					break;
+				default: //else... should not happen
+					System.out.print('E');
+					break;
+				}
 			}
 			System.out.println("|");
 		}
@@ -227,5 +276,24 @@ public class Map {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * set the c-coordinate of the map to hit. if there's a ship there, sink it, otherwise set it to a miss.
+	 * @param c
+	 */
+	public void setHit(Coordinate c){
+		int x = c.getX();
+		int y = c.getY();
+		
+		if(map[x][y] == '#'){ //if it's a square with a ship
+			map[x][y]='X'; 
+		}
+		else if(map[x][y]=='_' || map[x][y]=='o'){ //if it's an empty square
+			map[x][y] ='~';
+		}		
+		
+		else
+			map[x][y] = 'E';//should not happen... throw error?
 	}
 }

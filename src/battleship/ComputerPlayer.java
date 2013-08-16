@@ -52,7 +52,7 @@ public class ComputerPlayer extends Player {
 				isPlaced=checkAndPlace(map, ship, startCoordinate, orientation);
 			}
 		}
-		map.drawMap();
+		map.drawSetupMap();
 	}
 
 

@@ -98,6 +98,17 @@ public abstract class Player {
 		//If the coordinate is not in any ship in the fleet
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param c
+	 * @param map
+	 * @return
+	 */
+	private boolean setHit(Coordinate c, Map map){
+		return setHit(c);
+	}
+	
 	/**
 	 * Compares the coordinates of the shot with all coordinates of the fleet. If it's a hit - remove the ship from the fleet.
 	 * @param c
@@ -114,10 +125,13 @@ public abstract class Player {
 	}
 
 	/**
-	 * "Fire a shot" at a given coordinate on a given map.
+	 * "Fire a shot" at a coordinate on a given map, uses generateMove to get the coordinate
 	 * @param map - the map, c - the coordinate on the map
+	 * @return true if all ships has been sunk
 	 */
-	public void makeMove(Map map, Coordinate c){
+	public boolean makeMove(Map map){
+		Coordinate c = generateMove(map);
+		return setHit(c,map);
 		
 	}
 

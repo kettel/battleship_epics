@@ -80,12 +80,12 @@ public class Main {
 		ComputerPlayer computer = new ComputerPlayer();
 		computer.placeShips(computerMap);
 		computerMap.setForPlay();
-		computerMap.drawMap();
+		computerMap.drawSetupMap();
 		
 		HumanPlayer human = new HumanPlayer();
 		human.placeShips(humanMap);
 		humanMap.setForPlay();
-		humanMap.drawMap();
+		humanMap.drawSetupMap();
 		
 	}
 
