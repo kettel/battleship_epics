@@ -14,15 +14,17 @@ import battleship.Map.MapSize;
  * 
  * TODO: super: Player
  * [X] draw board for players
- * TODO: Make move - a super one - should probably be the same for both human and computer
+ * [X] MakeMove - a super one - should probably be the same for both human and computer
+ * 		***functions for the human player***
  * 
  * 
  * 
  * TODO: Human Player:
  *	[X] Draw player entered ship on board.
- * 	TODO: Make a move
+ * 	[X]: Make a move
   	* 	TODO: Handle collisions (what did we mean - same player hitting on the same square twice or something?)
- * 		TODO: Basic textinput (x,y)
+ * 		[X] Basic textinput (x,y)
+ * 			TODO: Does not yet handle exceptions if you enter unexpected things (like a letter or a)
  * 			(TODO: Advanced placement w keyarrows)
  * 	  	TODO: Make support for another human player
  * 
@@ -79,14 +81,21 @@ public class Main {
 		
 		ComputerPlayer computer = new ComputerPlayer();
 		computer.placeShips(computerMap);
-		computerMap.setForPlay();
-		computerMap.drawSetupMap();
+		//computerMap.setForPlay();
+		//computerMap.drawSetupMap();
+		//computerMap.drawGameMap();
+		
+		
+		
 		
 		HumanPlayer human = new HumanPlayer();
-		human.placeShips(humanMap);
+		human.makeMove(computerMap);
+		computerMap.drawGameMap();
+		
+		/*human.placeShips(humanMap);
 		humanMap.setForPlay();
 		humanMap.drawSetupMap();
-		
+		*/
 	}
 
 }

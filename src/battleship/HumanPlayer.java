@@ -87,7 +87,7 @@ public class HumanPlayer extends Player {
 		// while a valid move has yet to be generated
 		while(isValidMove==false || coord == null){
 			//Show map
-			map.drawSetupMap();
+			map.drawGameMap();
 			//Get input
 			try {
 				System.out.println("Ange var du vill skjuta enligt formatet (x,y):");
@@ -98,8 +98,8 @@ public class HumanPlayer extends Player {
 			}
 			//Check if input is valid
 			isValidMove = map.isSquareNotHit(coord);
-			coord = null;
 		}
+		System.out.println("ok move:" +coord.getX()+','+coord.getY());
 		return coord;
 	}
 }

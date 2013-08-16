@@ -79,7 +79,7 @@ public abstract class Player {
 	 * @param Coordinate c - the coordinate 
 	 * @return weather the shot hit a ship or not.
 	 */
-	private boolean checkIfHit(Coordinate c){
+	private boolean checkIfIsHit(Coordinate c){ //TODO: seems to be unused
 		
 		//For all ships in fleet
 		for (Integer ship : fleet.keySet()) {
@@ -100,12 +100,13 @@ public abstract class Player {
 	}
 	
 	/**
-	 * 
-	 * @param c
-	 * @param map
-	 * @return
+	 * fires the shot basically. Calls upon functions to set the shot on the map and to remove the ship (or ship-part) from the fleet  
+	 * @param c - the coordinate of the map
+	 * @param map -the map that shall be fired upon
+	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
 	 */
 	private boolean setHit(Coordinate c, Map map){
+		map.setHit(c);
 		return setHit(c);
 	}
 	
@@ -115,13 +116,18 @@ public abstract class Player {
 	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
 	 */
 	private boolean setHit(Coordinate c){
+		
 		for (Integer ship : fleet.keySet()) {
-			if(fleet.get(ship).contains(c)){
-				fleet.get(ship).remove(c);
-				return fleet.get(ship).isEmpty();
+			//Check if any coordinate in ship is the given coordinate
+			for(Coordinate coordinate : fleet.get(ship)){
+				if (c.isCoordinate(coordinate)){ //if true, remove it
+					fleet.get(ship).remove(coordinate);
+					return fleet.get(ship).isEmpty();
+				}
 			}
 		}
-		return false;
+		
+		return false; //if coordinate not in any ship in fleet.
 	}
 
 	/**
