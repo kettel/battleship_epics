@@ -30,6 +30,50 @@ public abstract class Player {
 		}
 		return returnSet;
 	}
+	
+	
+	/**
+	 * Places the ships on the map. Human and computer uses different methods of doing so.
+	 * @param map
+	 */
+	public abstract void placeShips(Map map);
+	
+	/**
+	 * function that checks if a ship can be placed at a specified point, in a specific direction, and if it can - place it there.
+	 * Returns false if the ship can't be placed there and true if it can (and has been). 
+	 * @param map - the map of the player
+	 * @param ship - the length of the ship
+	 * @param startCoordinate - starting point
+	 * @param direction - 0=vertical, 1=horizontal
+	 * @return true if the ship was placed, false if it could not be placed.
+	 */
+	public boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
+
+		//Check if square and direction is placable
+		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
+			return false;
+		}
+		
+		//place the ship with the given parameters
+		if(direction == 0){
+			for (int i = 0; i < ship; i++) {
+				fleet.get(ship).add(
+						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
+				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
+			}
+			return true;
+		}
+		if(direction == 1){
+			for (int i = 0; i < ship; i++) {
+				fleet.get(ship).add(
+						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
+				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Compares the coordinate of the shot with the coordinates of all ships.
 	 * @param Coordinate c - the coordinate 
@@ -76,48 +120,6 @@ public abstract class Player {
 	 * @param c, map
 	 */
 	public abstract void makeMove(Coordinate c, Map map);
-	
-	/**
-	 * Places the ships on the map. Human and computer uses different methods of doing so.
-	 * @param map
-	 */
-	public abstract void placeShips(Map map);
-	
-	/**
-	 * function that checks if a ship can be placed at a specified point, in a specific direction, and if it can - place it there.
-	 * Returns false if the ship can't be placed there and true if it can (and has been). 
-	 * @param map - the map of the player
-	 * @param ship - the length of the ship
-	 * @param startCoordinate - starting point
-	 * @param direction - 0=vertical, 1=horizontal
-	 * @return true if the ship was placed, false if it could not be placed.
-	 */
-	public boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
-
-		//Check if square and direction is placable
-		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
-			return false;
-		}
-		
-		//place the ship with the given parameters
-		if(direction == 0){
-			for (int i = 0; i < ship; i++) {
-				fleet.get(ship).add(
-						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
-				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
-			}
-			return true;
-		}
-		if(direction == 1){
-			for (int i = 0; i < ship; i++) {
-				fleet.get(ship).add(
-						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
-				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
-			}
-			return true;
-		}
-		return false;
-	}
 
 	
 }
