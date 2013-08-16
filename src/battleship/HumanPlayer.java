@@ -24,13 +24,7 @@ public class HumanPlayer extends Player {
 		//fleet.put(3, new HashSet<Coordinate>()); // Submarine
 		//fleet.put(4, new HashSet<Coordinate>()); // Battleship
 		//fleet.put(5, new HashSet<Coordinate>()); // Aircraft carrier
-	}
-
-	@Override
-	public void makeMove(Coordinate c, Map map) {
-		
-	}
-	
+	}	
 	
 	@Override
 	public void placeShips(Map map) {
@@ -66,5 +60,11 @@ public class HumanPlayer extends Player {
 		}
 				
 		scanner.close();
+	}
+
+	@Override
+	public Coordinate generateMove(Map map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

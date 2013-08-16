@@ -31,11 +31,6 @@ public class ComputerPlayer extends Player {
 	}
 
 	@Override
-	public void makeMove(Coordinate c, Map map) {
-
-	}
-
-	@Override
 	public void placeShips(Map map) {
 		for (Integer ship : fleet.keySet()) {
 			isPlaced=false;
@@ -58,6 +53,13 @@ public class ComputerPlayer extends Player {
 			}
 		}
 		map.drawMap();
+	}
+
+
+	@Override
+	public Coordinate generateMove(Map map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

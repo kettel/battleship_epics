@@ -89,13 +89,11 @@ public abstract class Player {
 					return true;
 				}
 			}
-			
 			/*
 			if (fleet.get(ship).contains(c)){
 				return true;
 			}
-			*/
-			
+			*/	
 		}
 		//If the coordinate is not in any ship in the fleet
 		return false;
@@ -116,10 +114,18 @@ public abstract class Player {
 	}
 
 	/**
-	 * "Fire a shot" at a given coordinate. Human and computer uses different methods of generating the coordinate.
-	 * @param c, map
+	 * "Fire a shot" at a given coordinate on a given map.
+	 * @param map - the map, c - the coordinate on the map
 	 */
-	public abstract void makeMove(Coordinate c, Map map);
+	public void makeMove(Map map, Coordinate c){
+		
+	}
 
-	
+	/**
+	 * Generates the coordinate the player want to fire a shot at. Human and computer uses different methods of generating it.
+	 * Also makes sure that the move is valid.
+	 * @param map - the map that the player shall fire at.  
+	 * @return the coordinate
+	 */
+	public abstract Coordinate generateMove(Map map);
 }
