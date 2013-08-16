@@ -23,12 +23,21 @@ public class Map {
 	// the drawable map, contain the symbols representing the object in the squares 
 	private char[][] map;
 	
+	/**
+	 * TODO: Should this be used for something?
+	 * @author Victor,Wiktor
+	 *
+	 */
 	public static class MapSize {
 		public static int LARGE = 10;
 		public static int MEDIUM = 5;
 		public static int SMALL = 2;
 	}
 
+	/**
+	 * Constructor
+	 * @param size
+	 */
 	public Map(int size) {
 		super(); //<--TODO: needed? 
 		map = createMap(size);
@@ -93,7 +102,7 @@ public class Map {
 	public void setShipOnSquare(int i, int j){
 		//The square
 		map[i][j] = '#';
-		//The neihgbours
+		//The neighbors
 		if(i>0){
 			setNeigbour(i-1, j);
 		}
@@ -109,7 +118,7 @@ public class Map {
 	}
 	
 	/**
-	 * Sets a (empty) square as o (= a neighbor to a ship)
+	 * Sets a (empty) square as 'o' (= a neighbor to a ship)
 	 * @param the coordinate
 	 */
 	private void setNeigbour(int i, int j){
@@ -131,7 +140,7 @@ public class Map {
 	 */
 	public boolean checkIfPlacable(Coordinate c, int direction, int length){
 		
-		if(direction == 0){ /*horizontal*/
+		if(direction == 0){ /*if horizontal*/
 			for (int i = 0; i < length; i++) {
 				if (!ifSquareFree(c.getX()+i, c.getY())) {
 					return false;
@@ -139,7 +148,7 @@ public class Map {
 			}
 			return true;
 		}
-		if(direction == 1){ /*vertical*/
+		if(direction == 1){ /*if vertical*/
 			for (int i = 0; i < length; i++) {
 				if (!ifSquareFree(c.getX(), c.getY()+i)) {
 					return false;
@@ -154,8 +163,8 @@ public class Map {
 	}
 	/**
 	 * returns true if map[x][y] is NOT a ship NOR a neighbor to a ship (neither # nor o) NOR outside the map
-	 * @param x
-	 * @param y
+	 * @param x coordinate of the square
+	 * @param y coordinate of the square
 	 * @return
 	 */
 	private boolean ifSquareFree(int x, int y){
