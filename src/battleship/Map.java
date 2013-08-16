@@ -1,7 +1,5 @@
 package battleship;
 
-import java.util.HashSet;
-
 /**
  * The map-object. Contain a size^2 matrix with chars representing the objects on the map.
  * Lathund;
