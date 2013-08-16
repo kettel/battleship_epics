@@ -294,6 +294,6 @@ public class Map {
 		}		
 		
 		else
-			map[x][y] = 'E';//should not happen... throw error?
+			map[x][y] = 'E';//TODO: should not happen... throw error?
 	}
 }
