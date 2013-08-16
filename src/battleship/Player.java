@@ -32,12 +32,14 @@ public abstract class Player {
 	}
 	/**
 	 * Compares the coordinate of the shot with the coordinates of all ships.
-	 * @param c
+	 * @param Coordinate c - the coordinate 
 	 * @return weather the shot hit a ship or not.
 	 */
 	private boolean checkIfHit(Coordinate c){
+		
+		//For all ships in fleet
 		for (Integer ship : fleet.keySet()) {
-			
+			//Check if any coordinate in ship is the given coordinate
 			for(Coordinate coordinate : fleet.get(ship)){
 				if(c.isCoordinate(coordinate)){
 					return true;
@@ -51,6 +53,7 @@ public abstract class Player {
 			*/
 			
 		}
+		//If the coordinate is not in any ship in the fleet
 		return false;
 	}
 	/**
@@ -69,7 +72,7 @@ public abstract class Player {
 	}
 
 	/**
-	 * Fire a shot at a given coordinate. Human and computer uses different methods of generating the coordinate.
+	 * "Fire a shot" at a given coordinate. Human and computer uses different methods of generating the coordinate.
 	 * @param c, map
 	 */
 	public abstract void makeMove(Coordinate c, Map map);

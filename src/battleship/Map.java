@@ -30,21 +30,24 @@ public class Map {
 	}
 
 	public Map(int size) {
-		super();
+		super(); //<--TODO: needed? 
 		map = createMap(size);
 		
 	}
 	public char[][] getMap(){
 		return map;
 	}
+	/**
+	 * Draw the ascii representation of THIS map in the console. Same as "map.drawMap(map.getMap());"
+	 */
+	public void drawMap(){
+		drawMap(this.map);
+	}
 	
 	/**
-	 * draws the ascii representation of the map in the console
-	 * 
-	 * TODO: Removed the in-parameters of this function. fleetCoordinates weren't used and the class already has access to its map.
-	 * 		Leaved them there as comments if we wanted them later. 
+	 * draws the ascii representation of a given map in the console
 	 */
-	public void drawMap(/*char[][] map,HashSet<Coordinate> fleetCoordinates*/) {
+	public void drawMap(char[][] map/*,HashSet<Coordinate> fleetCoordinates*/) {
 		
 		// For bugchecking - the loop-part below prints the coordinates that's in the fleet
 		/*for (Coordinate coordinate : fleetCoordinates) {
@@ -69,8 +72,8 @@ public class Map {
 	}
 
 	/**
-	 * Create the map matrix with specific size. All fields are initially filled with '_'
-	 * @param size of the map (lenght of the sides)
+	 * Create the map matrix with specific size. All fields are initially filled with '_':s
+	 * @param size of the map (length of the sides)
 	 * @return
 	 */
 	private char[][] createMap(int size) {
@@ -106,7 +109,7 @@ public class Map {
 	}
 	
 	/**
-	 * Sets a (empty square) as o = a neighbor to a ship
+	 * Sets a (empty) square as o (= a neighbor to a ship)
 	 * @param the coordinate
 	 */
 	private void setNeigbour(int i, int j){
