@@ -99,7 +99,6 @@ public class HumanPlayer extends Player {
 			//Check if input is valid
 			isValidMove = map.isSquareNotHit(coord);
 		}
-		System.out.println("ok move:" +coord.getX()+','+coord.getY());
 		return coord;
 	}
 }

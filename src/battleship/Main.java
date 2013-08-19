@@ -1,5 +1,8 @@
 package battleship;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import battleship.Map.MapSize;
 
 /*
@@ -46,7 +49,7 @@ import battleship.Map.MapSize;
  * 
  * If time allows for it:
  * TODO: Add support for more shiptypes
- * TODO: Network-play
+ * TODO: Network-play !!! Will probably have to rewrite a lot !!!
  * TODO: Highscore
  * 	TODO: Store permanently.
  * 		TODO: Encryption
@@ -85,16 +88,15 @@ public class Main {
 		//computerMap.drawSetupMap();
 		//computerMap.drawGameMap();
 		
-		
-		
-		
 		HumanPlayer human = new HumanPlayer();
 		
-		while(!computer.fleet.isEmpty()){
+		switchFleet(human,computer);
+		
+		while(!human.fleet.isEmpty()){
 			if(human.makeMove(computerMap)){
 				System.out.println("Skepp sänkt");
 			}
-			computerMap.drawGameMap();
+			//computerMap.drawGameMap();
 		}
 		
 		
@@ -102,6 +104,19 @@ public class Main {
 		humanMap.setForPlay();
 		humanMap.drawSetupMap();
 		*/
+	}
+	
+	/**
+	 * Function used to switch the fleets of the players so that both players more easily can fire and make checks on the fleet of the opponent.
+	 * TODO: as of now not < viable solution for games over the internet. 
+	 * @param Player p1 
+	 * @param Player p2
+	 */
+	private static void switchFleet(Player p1, Player p2){
+		HashMap<Integer, HashSet<Coordinate>> buffer = p1.fleet;
+		p1.fleet = p2.fleet;
+		p2.fleet = buffer;
+		buffer = null;
 	}
 
 }
