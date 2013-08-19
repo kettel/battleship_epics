@@ -92,12 +92,15 @@ public class HumanPlayer extends Player {
 			try {
 				System.out.println("Ange var du vill skjuta enligt formatet (x,y):");
 				coord = makeCoordinateFromInput(scanner);
+				
+				//Check if input is valid
+				isValidMove = map.isSquareNotHit(coord);
+				
 			} catch (Exception e) {
 				isValidMove = false;
 				System.out.println("input error2 - please try again");
 			}
-			//Check if input is valid
-			isValidMove = map.isSquareNotHit(coord);
+			
 		}
 		return coord;
 	}

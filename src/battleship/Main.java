@@ -94,7 +94,8 @@ public class Main {
 		
 		while(!human.fleet.isEmpty()){
 			if(human.makeMove(computerMap)){
-				System.out.println("Skepp sänkt");
+				System.out.println("seger!");
+				
 			}
 			//computerMap.drawGameMap();
 		}

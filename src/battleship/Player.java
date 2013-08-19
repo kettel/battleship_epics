@@ -112,17 +112,26 @@ public abstract class Player {
 	
 	/**
 	 * Compares the coordinates of the shot with all coordinates of the fleet. If it's a hit - remove the ship from the fleet.
-	 * @param c
-	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
+	 * @param Coordinate c - the coordinate that has been shot 
+	 * @return true if the fleet is empty - all ships has been sunk
 	 */
 	private boolean setHit(Coordinate c){
 		
-		for (Integer ship : fleet.keySet()) {
+		
+		for (Integer ship : fleet.keySet()) { //for every ship in the fleet do:
+			
 			//Check if any coordinate in ship is the given coordinate
 			for(Coordinate coordinate : fleet.get(ship)){
-				if (c.isCoordinate(coordinate)){ //if true, remove it
+				if (c.isCoordinate(coordinate)){ //if coordinate in the ship, remove coordinate from ship
+					System.out.println("Träff!");
 					fleet.get(ship).remove(coordinate);
-					return fleet.get(ship).isEmpty();
+					
+					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
+						System.out.println("Skepp sänkt");
+						fleet.remove(ship);
+					}
+					return fleet.isEmpty();
+					
 				}
 			}
 		}
@@ -133,7 +142,7 @@ public abstract class Player {
 	/**
 	 * "Fire a shot" at a coordinate on a given map, uses generateMove to get the coordinate
 	 * @param map - the map, c - the coordinate on the map
-	 * @return true if all ships has been sunk
+	 * @return true if all ships has been sunk - used to decide if the game is over.
 	 */
 	public boolean makeMove(Map map){
 		Coordinate c = generateMove(map);
