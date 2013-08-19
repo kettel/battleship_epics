@@ -89,8 +89,14 @@ public class Main {
 		
 		
 		HumanPlayer human = new HumanPlayer();
-		human.makeMove(computerMap);
-		computerMap.drawGameMap();
+		
+		while(!computer.fleet.isEmpty()){
+			if(human.makeMove(computerMap)){
+				System.out.println("Skepp sänkt");
+			}
+			computerMap.drawGameMap();
+		}
+		
 		
 		/*human.placeShips(humanMap);
 		humanMap.setForPlay();
