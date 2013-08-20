@@ -61,22 +61,23 @@ public class ComputerPlayer extends Player {
 		// TODO Auto-generated method stub
 		
 		int[] start = new int[2];
-		Boolean isValidMove = false; //...yes... unused...
+		Boolean isValidMove = false;
 		
 		Coordinate c = null;
 		
 		do{
 			for (int i =0; i< 2; i++) {
 				// Generate a random number in the range [0,map.getSize()-1]
-				start[i] = 0 + (int)(Math.random()*map.getSize()-1);
+				start[i] = 0 + (int)(Math.random()*map.getSize());
 			}
 			//Create the coordinate
 			c = new Coordinate(
 					Integer.valueOf(start[0]), Integer.valueOf(start[1]));
-			isValidMove = map.isSquareNotHit(c);
 			
-			}while(isValidMove = false);
-		
+			
+			isValidMove = map.isSquareNotHit(c);			
+			}while(!isValidMove);
+		System.out.println(c.getX()+","+c.getY());
 		
 		return c;
 	}

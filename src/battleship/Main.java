@@ -19,13 +19,14 @@ import battleship.Map.MapSize;
  * [X] draw board for players
  * [X] MakeMove - a super one - should probably be the same for both human and computer
  * 		***functions for the human player***
+ * 		***computerplayer got a randomized version***
  * 
  * 
  * 
  * TODO: Human Player:
  *	[X] Draw player entered ship on board.
  * 	[X]: Make a move
-  	* 	TODO: Handle collisions (what did we mean - same player hitting on the same square twice or something?)
+  	* 	[X] Handle collisions (if we with collision meant "the same player hitting on the same square twice" or something like that)
  * 		[X] Basic textinput (x,y)
  * 			TODO: Does not yet handle exceptions if you enter unexpected things (like a letter or a)
  * 			(TODO: Advanced placement w keyarrows)
@@ -35,8 +36,10 @@ import battleship.Map.MapSize;
  * 	[X] Place ships (random)
  * 
  * 	TODO: Make a move (pure random, peeking or something with memory?)
+ * 		[X] random
  * 
  * TODO: Create a functioning game-loop ((preferably one that can be used both locally and over intewebs))
+ * 		***should probably not be a static thing. Alpha down below in main.
  * 
  * TODO: Determine winner.
  * TODO: Count misses
@@ -82,34 +85,52 @@ public class Main {
 		//HumanPlayer humanPlayer=new HumanPlayer();
 		//humanPlayer.placeShips(humanMap);
 		
-		ComputerPlayer computer = new ComputerPlayer();
-		computer.placeShips(computerMap);
+		ComputerPlayer BMO = new ComputerPlayer();
+		BMO.placeShips(computerMap);
+		System.out.println("BMO");
+		ComputerPlayer HAL = new ComputerPlayer();
+		HAL.placeShips(humanMap);
+		System.out.println("HAL");
 		//computerMap.setForPlay();
 		//computerMap.drawSetupMap();
 		//computerMap.drawGameMap();
 		
-		HumanPlayer human = new HumanPlayer();
+		//HumanPlayer human = new HumanPlayer();
 		
-		switchFleet(human,computer);
+		//switchFleet(human,computer);
+		switchFleet(BMO, HAL);
 		
-		while(!human.fleet.isEmpty()){
-			if(human.makeMove(computerMap)){
-				System.out.println("seger!");
-				
+		int turn = 0;
+		Player ActivePlayer = null;
+		
+		//TODO: simple gameloop alpha version.
+		
+		while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
+			turn++;
+			ActivePlayer = BMO;
+			if(BMO.makeMove(humanMap)){
+				break;
 			}
-			//computerMap.drawGameMap();
+			humanMap.drawGameMap();
+			
+			ActivePlayer = HAL;
+			if(HAL.makeMove(computerMap)){
+				break;
+			}
+			computerMap.drawGameMap();
 		}
-		
-		
+
+		System.out.println(ActivePlayer.toString() +" vann!");
+		System.out.println("Det tog "+turn+" omgångar");
+			//computerMap.drawGameMap();
 		/*human.placeShips(humanMap);
 		humanMap.setForPlay();
 		humanMap.drawSetupMap();
 		*/
 	}
-	
 	/**
-	 * Function used to switch the fleets of the players so that both players more easily can fire and make checks on the fleet of the opponent.
-	 * TODO: as of now not < viable solution for games over the internet. 
+	 * Function used to switch the fleets of the players so that both players more easily can fire and make checks on the fleet the opponent placed.
+	 * TODO: as of now not viable solution for games over the internet. 
 	 * @param Player p1 
 	 * @param Player p2
 	 */

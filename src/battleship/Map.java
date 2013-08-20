@@ -54,13 +54,7 @@ public class Map {
 	/**
 	 * draws the ascii representation of a given map in the console
 	 */
-	public void drawSetupMap(char[][] map/*,HashSet<Coordinate> fleetCoordinates*/) {
-		
-		// For bugchecking - the loop-part below prints the coordinates that's in the fleet
-		/*for (Coordinate coordinate : fleetCoordinates) {
-					System.out.println(coordinate.getX() +","+ coordinate.getY());
-				}*/
-		
+	public void drawSetupMap(char[][] map) {
 		
 		System.out.println("y\\x");
 		System.out.print(" ");
@@ -119,7 +113,7 @@ public class Map {
 					System.out.print('X');
 					break;
 				default: //else... should not happen
-					System.out.print('E');
+					System.out.print(/*'E'*/map[i][j]);
 					break;
 				}
 			}
@@ -285,6 +279,7 @@ public class Map {
 	public void setHit(Coordinate c){
 		int x = c.getX();
 		int y = c.getY();
+		System.out.println(map[x][y]);
 		
 		if(map[x][y] == '#'){ //if it's a square with a ship
 			map[x][y]='X'; 
