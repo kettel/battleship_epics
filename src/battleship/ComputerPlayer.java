@@ -15,8 +15,8 @@ public class ComputerPlayer extends Player {
      * TODO: Implement a functional computer player
      *
      */
-	private static int VERTICAL = 0;
-	private static int HORIZONTAL = 1;
+	/*private static int VERTICAL = 0;
+	private static int HORIZONTAL = 1;*/
 	
 	boolean isPlaced;
 
@@ -59,7 +59,26 @@ public class ComputerPlayer extends Player {
 	@Override
 	public Coordinate generateMove(Map map) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		int[] start = new int[2];
+		Boolean isValidMove = false; //...yes... unused...
+		
+		Coordinate c = null;
+		
+		do{
+			for (int i =0; i< 2; i++) {
+				// Generate a random number in the range [0,map.getSize()-1]
+				start[i] = 0 + (int)(Math.random()*map.getSize()-1);
+			}
+			//Create the coordinate
+			c = new Coordinate(
+					Integer.valueOf(start[0]), Integer.valueOf(start[1]));
+			isValidMove = map.isSquareNotHit(c);
+			
+			}while(isValidMove = false);
+		
+		
+		return c;
 	}
 
 }
