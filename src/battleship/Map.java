@@ -56,7 +56,7 @@ public class Map {
 	 */
 	public void drawSetupMap(char[][] map) {
 		
-		System.out.println("y\\x");
+		System.out.println("x\\y");
 		System.out.print(" ");
 		for (int i =0; i < map.length;i++) {
 			System.out.print(" "+i);
@@ -85,7 +85,7 @@ public class Map {
 	 */
 	public void drawGameMap(char[][] map) {
 	
-		System.out.println("y\\x");
+		System.out.println("x\\y");
 		System.out.print(" ");
 		for (int i =0; i < map.length;i++) {
 			System.out.print(" "+i);

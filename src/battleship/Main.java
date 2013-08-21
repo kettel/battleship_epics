@@ -11,9 +11,15 @@ import battleship.Map.MapSize;
  *  
  * TODO: Make the game follow teh rulez
  * [X] boats at least placed 1 square away from each other - fixed for human and computer alike
- * [X] Create a way to compare two coordinates
+ * 	[X] Create a way to compare two coordinates
  * 		*** Created the isCoordinate (better name?) functions in coordinate ***
+ * 
  * TODO: more rules?
+ * 		alternatives:
+ * 		[ ] you may fire once per ship in your fleet that has yet to be damaged, or once if all ship has been damaged
+ * 		[ ] may fire once per unsunk ship
+ * 		[ ] may fire three times per turn, but may not know what shot hit what (like "you fired at (0,0),(1,1),(2,2). You had 2 hits and 1 miss")
+ * 		[ ] if you sink a ship you may fire again
  * 
  * TODO: super: Player
  * [X] draw board for players
@@ -28,7 +34,7 @@ import battleship.Map.MapSize;
  * 	[X]: Make a move
   	* 	[X] Handle collisions (if we with collision meant "the same player hitting on the same square twice" or something like that)
  * 		[X] Basic textinput (x,y)
- * 			TODO: Does not yet handle exceptions if you enter unexpected things (like a letter or a)
+ * 			[X] incorrect input should be fixed
  * 			(TODO: Advanced placement w keyarrows)
  * 	  	TODO: Make support for another human player
  * 
@@ -88,7 +94,7 @@ public class Main {
 		ComputerPlayer BMO = new ComputerPlayer();
 		BMO.placeShips(computerMap);
 		System.out.println("BMO");
-		ComputerPlayer HAL = new ComputerPlayer();
+		Player HAL = new HumanPlayer();
 		HAL.placeShips(humanMap);
 		System.out.println("HAL");
 		//computerMap.setForPlay();
@@ -130,7 +136,8 @@ public class Main {
 	}
 	/**
 	 * Function used to switch the fleets of the players so that both players more easily can fire and make checks on the fleet the opponent placed.
-	 * TODO: as of now not viable solution for games over the internet. 
+	 * TODO: as of now not viable solution for games over the internet.
+	 * TODO: should this be in player? 
 	 * @param Player p1 
 	 * @param Player p2
 	 */
