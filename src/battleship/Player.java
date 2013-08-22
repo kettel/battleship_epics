@@ -1,5 +1,9 @@
 package battleship;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -20,9 +24,50 @@ public abstract class Player {
 	 *  Constructor
 	 * @param type - TODO: vad gör den
 	 */
-	public Player(int type) {		
+	public Player(int size) {
+		try {
+			//create reader
+			BufferedReader in = new BufferedReader(new FileReader("fleet.txt"));
+			
+			while(!in.ready()){
+				//wait until reader is ready.
+			}
+			//import the first line and split it
+			String importString =in.readLine();
+			String[] importFleet = importString.split(",");
+			int ship;
+			
+			//for every ship-type in the "split string", add as many ships of length as it says... something
+			for (int i = 0; i < importFleet.length; i++) {
+				 ship = Integer.parseInt(importFleet[i]);
+				if (ship<=size) {
+					fleet.put(ship, new HashSet<Coordinate>());
+				}
+				else{
+					System.out.println("skepp av storlek " + ship+" är för stor för brädet.");
+					System.out.println("kommer ej att användas");
+				}
+				
+			}
+			
+			in.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
+	/**
+	 * Function that return all the coordinates of the fleet.
+	 * @return the coordinates of the ships of the fleet.
+	 */
 	public HashSet<Coordinate> getCoordinates(){
 		HashSet<Coordinate> returnSet = new HashSet<Coordinate>();
 		for (Integer ship : fleet.keySet()) {

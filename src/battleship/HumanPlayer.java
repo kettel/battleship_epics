@@ -16,9 +16,9 @@ public class HumanPlayer extends Player {
 
 
 
-	public HumanPlayer() {
+	public HumanPlayer(int size) {
 		//TODO: should this be in Player? ('Cause I presume its the same for all players)
-		super(FleetType.CLASSIC);
+		super(size);
 		
 		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
 		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser

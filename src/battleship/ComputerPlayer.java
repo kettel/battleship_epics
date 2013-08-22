@@ -20,14 +20,15 @@ public class ComputerPlayer extends Player {
 	
 	boolean isPlaced;
 
-	public ComputerPlayer() {
-		super(FleetType.CLASSIC);
+	public ComputerPlayer(int size) {
+		super(size);
 		
-		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
+		/*fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
 		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser
 		fleet.put(3, new HashSet<Coordinate>()); // Submarine
 		fleet.put(4, new HashSet<Coordinate>()); // Battleship
 		fleet.put(5, new HashSet<Coordinate>()); // Aircraft carrier
+		*/
 	}
 
 	@Override

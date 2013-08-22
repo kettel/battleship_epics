@@ -91,12 +91,12 @@ public class Main {
 		//HumanPlayer humanPlayer=new HumanPlayer();
 		//humanPlayer.placeShips(humanMap);
 		
-		ComputerPlayer BMO = new ComputerPlayer();
+		Player BMO = new ComputerPlayer(MapSize.LARGE);
 		BMO.placeShips(computerMap);
-		System.out.println("BMO");
-		Player HAL = new HumanPlayer();
-		HAL.placeShips(humanMap);
-		System.out.println("HAL");
+
+		Player FINN = new HumanPlayer(MapSize.LARGE);
+		//FINN.placeShips(humanMap);
+		
 		//computerMap.setForPlay();
 		//computerMap.drawSetupMap();
 		//computerMap.drawGameMap();
@@ -104,14 +104,14 @@ public class Main {
 		//HumanPlayer human = new HumanPlayer();
 		
 		//switchFleet(human,computer);
-		switchFleet(BMO, HAL);
+		switchFleet(BMO, FINN);
 		
 		int turn = 0;
 		Player ActivePlayer = null;
 		
 		//TODO: simple gameloop alpha version.
 		
-		while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
+		/*while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
 			turn++;
 			ActivePlayer = BMO;
 			if(BMO.makeMove(humanMap)){
@@ -124,7 +124,7 @@ public class Main {
 				break;
 			}
 			computerMap.drawGameMap();
-		}
+		}*/
 
 		System.out.println(ActivePlayer.toString() +" vann!");
 		System.out.println("Det tog "+turn+" omgångar");
