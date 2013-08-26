@@ -91,36 +91,35 @@ public class Main {
 		//HumanPlayer humanPlayer=new HumanPlayer();
 		//humanPlayer.placeShips(humanMap);
 		
-		ComputerPlayer BMO = new ComputerPlayer();
-		BMO.placeShips(computerMap);
-		System.out.println("BMO");
-		Player HAL = new HumanPlayer();
-		HAL.placeShips(humanMap);
-		System.out.println("HAL");
+		Player player1 = new HumanPlayer();
+		player1.placeShips(computerMap);
+		System.out.println("P1");
+		Player player2 = new ComputerPlayer();
+		player2.placeShips(humanMap);
+		System.out.println("P2");
 		//computerMap.setForPlay();
 		//computerMap.drawSetupMap();
 		//computerMap.drawGameMap();
 		
 		//HumanPlayer human = new HumanPlayer();
 		
-		//switchFleet(human,computer);
-		switchFleet(BMO, HAL);
+		switchFleet(player1, player2);
 		
 		int turn = 0;
 		Player ActivePlayer = null;
 		
 		//TODO: simple gameloop alpha version.
 		
-		while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
+		while(!player1.fleet.isEmpty() && !player2.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
 			turn++;
-			ActivePlayer = BMO;
-			if(BMO.makeMove(humanMap)){
+			ActivePlayer = player1;
+			if(player1.makeMove(humanMap)){
 				break;
 			}
 			humanMap.drawGameMap();
 			
-			ActivePlayer = HAL;
-			if(HAL.makeMove(computerMap)){
+			ActivePlayer = player2;
+			if(player2.makeMove(computerMap)){
 				break;
 			}
 			computerMap.drawGameMap();
