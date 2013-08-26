@@ -39,6 +39,7 @@ import battleship.Map.MapSize;
  * 
  * TODO: Create a functioning game-loop ((preferably one that can be used both locally and over intewebs))
  * 		***should probably not be a static thing. Alpha down below in main.
+ * 		***should it be it's own object/class or something?
  * 
  * TODO: Determine winner.
  * TODO: Count misses
