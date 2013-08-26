@@ -110,17 +110,23 @@ public class Main {
 		
 		//TODO: simple gameloop alpha version.
 		
-		while(!player1.fleet.isEmpty() && !player2.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
+		while(turn<=100){ //while(true) should work as well. or while(turn <=100)
 			turn++;
 			ActivePlayer = player1;
 			if(player1.makeMove(humanMap)){
-				break;
+				System.out.println("Träff!");
+				if(player1.fleet.isEmpty()){
+					break;
+				}
 			}
 			humanMap.drawGameMap();
 			
 			ActivePlayer = player2;
 			if(player2.makeMove(computerMap)){
-				break;
+				System.out.println("Träff!");
+				if(player2.fleet.isEmpty()){
+					break;
+				}
 			}
 			computerMap.drawGameMap();
 		}
