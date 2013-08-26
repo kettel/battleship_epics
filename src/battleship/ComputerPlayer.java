@@ -2,7 +2,6 @@
 package battleship;
 
 import java.util.HashSet;
-
 import battleship.Player.FleetType;
 
 /**

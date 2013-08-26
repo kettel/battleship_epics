@@ -9,9 +9,16 @@ import java.util.Scanner;
  *
  */
 public class HumanPlayer extends Player {
+	//these:
 	private static int VERTICAL = 0;
 	private static int HORIZONTAL = 1;
-	boolean isPlaced;
+	//unused
+	
+	//Loop-booleans
+	boolean isPlaced; //boolean that is used to determine if the placement of a ship is valid.
+	boolean isValidMove; //boolean that is used to determine if a valid move has been made.
+	
+	//input scanner :D
 	private Scanner scanner = new Scanner(System.in); 
 
 
@@ -30,17 +37,17 @@ public class HumanPlayer extends Player {
 	/**
 	 * creates a Coordinate using input from the user 
 	 * @return a coordinate 
-	 * @throws Exception - if input is not valid
+	 * @throws Exception - if input is not valid (ie not on form (int x), (int y))
 	 */
 	public Coordinate makeCoordinateFromInput() throws Exception{
 		try{
-			//get input
-			
+			//get input as string
 			String input = scanner.nextLine();
+			//split string
 			String[] start = input.split(",");
 			
-			//create and return coordinate
-			return new Coordinate(Integer.parseInt(start[0]), Integer.parseInt(start[1]));
+			//create and return coordinate by parsing the split strings
+			return new Coordinate(Integer.parseInt(start[0]), Integer.parseInt(start[1])); //this part will most likely throw the exception
 		} catch(Exception e){
 			System.out.println(e);
 			throw new Exception();
@@ -81,7 +88,7 @@ public class HumanPlayer extends Player {
 	@Override
 	public Coordinate generateMove(Map map) {
 		
-		Boolean isValidMove = false;
+		isValidMove = false;
 		Coordinate coord = null;
 		// while a valid move has yet to be generated
 		while(isValidMove==false || coord == null){

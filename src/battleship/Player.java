@@ -21,13 +21,13 @@ public abstract class Player {
 	}
 
 	/**
-	 *  Constructor
-	 * @param type - TODO: vad gör den
+	 * constructor. of the superclass player. Get the fleet from a file and puts them in hashmap
+	 * @param size - the size of the map/board
 	 */
 	public Player(int size) {
 		try {
 			//create reader
-			BufferedReader in = new BufferedReader(new FileReader("fleet.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("Fleet.txt")); //"fleet.txt" should be a variable that get a fleet from any file (with fleet as a default prob.) 
 			
 			while(!in.ready()){
 				//wait until reader is ready.
@@ -35,22 +35,24 @@ public abstract class Player {
 			//import the first line and split it
 			String importString =in.readLine();
 			String[] importFleet = importString.split(",");
+			
 			int ship;
 			
-			//for every ship-type in the "split string", add as many ships of length as it says... something
+			//for every ship-type in the "split string"
 			for (int i = 0; i < importFleet.length; i++) {
 				 ship = Integer.parseInt(importFleet[i]);
-				if (ship<=size) {
+				 //add a ship of that length to the fleet 
+				if (ship<=size) { //as long as it's smaller then the board
 					fleet.put(ship, new HashSet<Coordinate>());
 				}
-				else{
+				else{ //If it's bigger then the board, print a message to the user
 					System.out.println("skepp av storlek " + ship+" är för stor för brädet.");
 					System.out.println("kommer ej att användas");
 				}
 				
 			}
 			
-			in.close();
+			in.close(); //close the reader
 			
 			
 		} catch (FileNotFoundException e) {
@@ -145,7 +147,7 @@ public abstract class Player {
 	}
 	
 	/**
-	 * fires the shot basically. Calls upon functions to set the shot on the map and to remove the ship (or ship-part) from the fleet  
+	 * the "fires shot" part of makeMove. Calls upon functions to set the shot on the map and to remove the ship (or ship-part) from the fleet  
 	 * @param c - the coordinate of the map
 	 * @param map -the map that shall be fired upon
 	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
@@ -185,7 +187,7 @@ public abstract class Player {
 	}
 
 	/**
-	 * "Fire a shot" at a coordinate on a given map, uses generateMove to get the coordinate
+	 * "Fire a shot" at a coordinate on a given map, uses generateMove to get the coordinate and setHit to "fire"
 	 * @param map - the map, c - the coordinate on the map
 	 * @return true if all ships has been sunk - used to decide if the game is over.
 	 */
