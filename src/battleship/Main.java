@@ -97,7 +97,6 @@ public class Main {
 
 		Player FINN = new HumanPlayer(MapSize.LARGE);
 		//FINN.placeShips(humanMap);
-		
 		//computerMap.setForPlay();
 		//computerMap.drawSetupMap();
 		//computerMap.drawGameMap();
@@ -106,6 +105,7 @@ public class Main {
 		
 		//switchFleet(human,computer);
 		switchFleet(BMO, FINN);
+
 		
 		int turn = 0;
 		Player ActivePlayer = FINN;
@@ -114,14 +114,14 @@ public class Main {
 		
 		/*while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
 			turn++;
-			ActivePlayer = BMO;
-			if(BMO.makeMove(humanMap)){
+			ActivePlayer = player1;
+			if(player1.makeMove(humanMap)){
 				break;
 			}
 			humanMap.drawGameMap();
 			
-			ActivePlayer = HAL;
-			if(HAL.makeMove(computerMap)){
+			ActivePlayer = player2;
+			if(player2.makeMove(computerMap)){
 				break;
 			}
 			computerMap.drawGameMap();
