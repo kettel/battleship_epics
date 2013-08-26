@@ -107,7 +107,7 @@ public class Main {
 		switchFleet(BMO, FINN);
 		
 		int turn = 0;
-		Player ActivePlayer = null;
+		Player ActivePlayer = FINN;
 		
 		//TODO: simple gameloop alpha version.
 		
