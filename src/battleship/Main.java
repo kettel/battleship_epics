@@ -14,17 +14,10 @@ import battleship.Map.MapSize;
  * 	[X] Create a way to compare two coordinates
  * 		*** Created the isCoordinate (better name?) functions in coordinate ***
  * 
- * TODO: more rules?
- * 		alternatives:
- * 		[ ] you may fire once per ship in your fleet that has yet to be damaged, or once if all ship has been damaged
- * 		[ ] may fire once per unsunk ship
- * 		[ ] may fire three times per turn, but may not know what shot hit what (like "you fired at (0,0),(1,1),(2,2). You had 2 hits and 1 miss")
- * 		[ ] if you sink a ship you may fire again
- * 
  * TODO: super: Player
  * [X] draw board for players
  * [X] MakeMove - a super one - should probably be the same for both human and computer
- * 		***functions for the human player***
+ * 		***works for the human player***
  * 		***computerplayer got a randomized version***
  * 
  * 
@@ -57,10 +50,17 @@ import battleship.Map.MapSize;
  * 
  * 
  * If time allows for it:
- * TODO: Add support for more shiptypes
+ * TODO: more rules? OwO
+ * 		alternatives:
+ * 		[ ] you may fire once per ship in your fleet that has yet to be damaged, or once if all ship has been damaged
+ * 		[ ] may fire once per unsunk ship
+ * 		[ ] may fire three times per turn, but may not know what shot hit what (like "you fired at (0,0),(1,1),(2,2). You had 2 hits and 1 miss")
+ * 		[ ] if you sink a ship you may fire again
+ * 
+ * TODO: Add support for more shiptypes <- begun
  * TODO: Network-play !!! Will probably have to rewrite a lot !!!
  * TODO: Highscore
- * 	TODO: Store permanently.
+ * 	TODO: Store permanently on file.
  * 		TODO: Encryption
  * 			TODO: Store on server. SSL. Mums!
  * TODO: Graphics
