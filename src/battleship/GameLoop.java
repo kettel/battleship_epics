@@ -15,6 +15,8 @@ public class GameLoop {
 	//Maps
 	Map map1; //map player2 shall fire upon
 	Map map2; //map player1 shall fire upon
+	
+	int turn = 0;
 
 	/**
 	 * Constructor for the gameloop. Takes in two players and then sets up everything necessary for the game. Then the game begins.
@@ -35,7 +37,8 @@ public class GameLoop {
 		
 		//Begin gameloop (as in main)
 		Player winner = playGame(size);
-		//Keep track of turns and score
+		System.out.println(winner.getAlias() + " vann!");
+		System.out.println("Det tog "+ turn+" omgångar!");
 		//After game: highscore time :D
 	}
 	/**
@@ -64,23 +67,55 @@ public class GameLoop {
 		buffer = null;
 	}
 	/**
-	 * The gameloop itself. lets the players take turns to fire at eachothers fleets. When no more ships remain, return the winner.
-	 * @param size of the map - used to calculate the maxamount of turns needed 
+	 * The gameloop itself. lets the players take turns to fire at each others fleets. When no more ships remain, return the winner.
 	 * @return the victor
 	 */
 	private Player playGame(int size) {
-		int turn = 0; //the current turn
-		
-		int maxTurns = Math.max(map1.getSize(),map2.getSize())^2;  //max possible amount of turns.
-		
-		
-		
-		
+		turn = 0; //the current turn
+		int maxTurns = size*size;  //max possible amount of turns.
+		Player activePlayer = null;
+		//Loopetyloop
 		while (turn<=maxTurns) {
-			turn++;
+			//start turn
+			turn++; //next turn
+			System.out.println("Omgång "+turn);
+			System.out.println("Statistik");
+			displayStatistics(); //print hit- & loss percentage for both players
+			//Player1 make its move
+			activePlayer = player1;
+			if (player1.makeMove(map2)) { //if move hits
+				System.out.println("Träff!");
+				if(player1.fleet.isEmpty()){ //if all ships has been sunk
+					break;
+				}
+			}
+			//Player2 make its move
+			activePlayer = player2;
+			if(player2.makeMove(map1)){ //if move hits
+				System.out.println("Träff!");
+				if(player2.fleet.isEmpty()){ //if all ships has been sunk
+					break;
+				}
+			}
 		}
+		if(turn>maxTurns){//should not happen... probably
+			activePlayer = null;
+		}
+		return activePlayer; //the last active player is the winner
 		
-		return player1;
-		
+	}
+	
+	/**
+	 * function that displays the hit- & loss percentage (/turn) of the players
+	 */
+	private void displayStatistics() {
+		//player1
+		System.out.println(player1.getAlias());
+		System.out.println("träffprocent: "+(float)player1.getNrHits()*100/turn);
+		System.out.println("förlustprocent: "+(float)player2.getNrLosses()*100/turn);
+		//player2
+		System.out.println(player2.getAlias());
+		System.out.println("träffprocent: "+(float)player2.getNrHits()*100/turn);
+		System.out.println("förlustprocent: "+(float)player1.getNrLosses()*100/turn);
 	}
 }

@@ -16,9 +16,9 @@ public class HumanPlayer extends Player {
 
 
 
-	public HumanPlayer() {
+	public HumanPlayer(String alias) {
 		//TODO: should this be in Player? ('Cause I presume its the same for all players)
-		super(FleetType.CLASSIC);
+		super(alias);
 		
 		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
 		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser

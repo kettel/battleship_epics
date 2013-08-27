@@ -20,8 +20,8 @@ public class ComputerPlayer extends Player {
 	
 	boolean isPlaced;
 
-	public ComputerPlayer() {
-		super(FleetType.CLASSIC);
+	public ComputerPlayer(String alias) {
+		super(alias);
 		
 		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
 		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser
@@ -59,7 +59,7 @@ public class ComputerPlayer extends Player {
 	@Override
 	public Coordinate generateMove(Map map) {
 		// TODO Auto-generated method stub
-		
+		map.drawGameMap();
 		int[] start = new int[2];
 		Boolean isValidMove = false;
 		
@@ -73,6 +73,7 @@ public class ComputerPlayer extends Player {
 			//Create the coordinate
 			c = new Coordinate(
 					Integer.valueOf(start[0]), Integer.valueOf(start[1]));
+		
 			
 			
 			isValidMove = map.isSquareNotHit(c);			

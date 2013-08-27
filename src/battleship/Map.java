@@ -279,7 +279,6 @@ public class Map {
 	public void setHit(Coordinate c){
 		int x = c.getX();
 		int y = c.getY();
-		System.out.println(map[x][y]);
 		
 		if(map[x][y] == '#'){ //if it's a square with a ship
 			map[x][y]='X'; 

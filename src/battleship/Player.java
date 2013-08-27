@@ -16,13 +16,16 @@ public abstract class Player {
 		public static int CLASSIC = 5;
 	}
 	private int nrHits = 0;
-	private int nrShips = 0;
+	private int maxNrShips = 0;
+	private int nrRemainingShips = 0;
+	private String alias;
 
 	/**
 	 *  Constructor
 	 * @param type - TODO: vad gör den
 	 */
-	public Player(int type) {		
+	public Player(String name) {
+		alias = name;
 	}
 	
 	public HashSet<Coordinate> getCoordinates(){
@@ -64,7 +67,8 @@ public abstract class Player {
 						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
 				//put it on map
 				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
-				nrShips++; //add it to the number of ships
+				maxNrShips++;
+				nrRemainingShips++; //add it to the number of ships
 			}
 			return true;
 		}
@@ -75,7 +79,8 @@ public abstract class Player {
 						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
 				//put it on map
 				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
-				nrShips++; //add it to the number of ships
+				maxNrShips++;
+				nrRemainingShips++; //add it to the number of ships
 			}
 			return true;
 		}
@@ -133,6 +138,7 @@ public abstract class Player {
 				if (c.isCoordinate(coordinate)){ //if coordinate in the ship, remove coordinate from ship
 					isHit = true;
 					nrHits++;
+					nrRemainingShips--;
 					fleet.get(ship).remove(coordinate);
 					
 					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
@@ -176,7 +182,15 @@ public abstract class Player {
 	/**
 	 * @return the number of losses the fleet has suffered, amount of hits the enemy has had. 
 	 */
-	public int getNrLosses(){
-		return nrShips-fleet.size();
+	public int getNrLosses(){		
+		return maxNrShips-nrRemainingShips;
 	}
+
+	/**
+	 * @return the alias of this player
+	 */
+	public String getAlias() {
+		return alias;
+	}
+
 }
