@@ -32,7 +32,7 @@ public class HumanPlayer extends Player {
 	 * @return a coordinate 
 	 * @throws Exception - if input is not valid
 	 */
-	public Coordinate makeCoordinateFromInput() throws Exception{
+	private Coordinate makeCoordinateFromInput() throws Exception{
 		try{
 			//get input
 			

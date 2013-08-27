@@ -253,7 +253,7 @@ public class Map {
 	
 	/**
 	 * returns the size of current map
-	 * @return
+	 * @return size of the map
 	 */
 	public int getSize() {
 		return size;

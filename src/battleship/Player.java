@@ -15,6 +15,8 @@ public abstract class Player {
 	public static class FleetType {
 		public static int CLASSIC = 5;
 	}
+	private int nrHits = 0;
+	private int nrShips = 0;
 
 	/**
 	 *  Constructor
@@ -47,7 +49,7 @@ public abstract class Player {
 	 * @param direction - 0=vertical, 1=horizontal
 	 * @return true if the ship was placed, false if it could not be placed.
 	 */
-	public boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
+	protected boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
 
 		//Check if square and direction is placable
 		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
@@ -57,17 +59,23 @@ public abstract class Player {
 		//place the ship with the given parameters
 		if(direction == 0){
 			for (int i = 0; i < ship; i++) {
+				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
+				//put it on map
 				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
+				nrShips++; //add it to the number of ships
 			}
 			return true;
 		}
 		if(direction == 1){
 			for (int i = 0; i < ship; i++) {
+				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
+				//put it on map
 				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
+				nrShips++; //add it to the number of ships
 			}
 			return true;
 		}
@@ -124,6 +132,7 @@ public abstract class Player {
 			for(Coordinate coordinate : fleet.get(ship)){
 				if (c.isCoordinate(coordinate)){ //if coordinate in the ship, remove coordinate from ship
 					isHit = true;
+					nrHits++;
 					fleet.get(ship).remove(coordinate);
 					
 					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
@@ -157,4 +166,17 @@ public abstract class Player {
 	 * @return the coordinate
 	 */
 	public abstract Coordinate generateMove(Map map);
+	
+	/**
+	 * @return the number of shots that has hit an enemy 
+	 */
+	public int getNrHits(){
+		return nrHits;
+	}
+	/**
+	 * @return the number of losses the fleet has suffered, amount of hits the enemy has had. 
+	 */
+	public int getNrLosses(){
+		return nrShips-fleet.size();
+	}
 }
