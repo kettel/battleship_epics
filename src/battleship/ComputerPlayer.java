@@ -13,8 +13,8 @@ public class ComputerPlayer extends Player {
 	
 	boolean isPlaced;
 
-	public ComputerPlayer(int size,String alias) {
-		super(size,alias);
+	public ComputerPlayer(int size,String alias,String source) {
+		super(size,alias,source);
 	}
 
 	@Override

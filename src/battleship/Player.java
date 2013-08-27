@@ -28,10 +28,10 @@ public abstract class Player {
 	 * constructor. of the superclass player. Get the fleet from a file and puts them in hashmap
 	 * @param size - the size of the map/board
 	 */
-	public Player(int size, String name) {
+	public Player(int size, String name, String source) {
 		try {
 			//create reader
-			BufferedReader in = new BufferedReader(new FileReader("Fleet.txt")); //"fleet.txt" should be a variable that get a fleet from any file (with fleet as a default prob.) 
+			BufferedReader in = new BufferedReader(new FileReader(source)); //"fleet.txt" should be a variable that get a fleet from any file (with fleet as a default prob.) 
 			
 			while(!in.ready()){
 				//wait until reader is ready.

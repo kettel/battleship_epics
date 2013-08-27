@@ -83,9 +83,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		int size = 10;
+		String source = "fleet.txt";
 
-		Player player1 = new ComputerPlayer(size,"HAL");
-		Player player2 = new ComputerPlayer(size,"BMO");
+		Player player1 = new ComputerPlayer(size,"HAL",source);
+		Player player2 = new ComputerPlayer(size,"BMO",source);
 		GameLoop game = new GameLoop(size, player1, player2);
 	}
 	

@@ -21,9 +21,9 @@ public class HumanPlayer extends Player {
 	//input scanner :D
 	private Scanner scanner = new Scanner(System.in); 
 
-	public HumanPlayer(int size,String alias) {
+	public HumanPlayer(int size,String alias,String source) {
 		//TODO: should this be in Player? ('Cause I presume its the same for all players)
-		super(size,alias);
+		super(size,alias,source);
 	}
 	
 	/**
