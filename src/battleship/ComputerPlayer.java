@@ -10,24 +10,11 @@ import battleship.Player.FleetType;
  *
  */
 public class ComputerPlayer extends Player {
-    /**
-     * TODO: Implement a functional computer player
-     *
-     */
-	/*private static int VERTICAL = 0;
-	private static int HORIZONTAL = 1;*/
 	
 	boolean isPlaced;
 
-	public ComputerPlayer(int size) {
-		super(size);
-		
-		/*fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
-		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser
-		fleet.put(3, new HashSet<Coordinate>()); // Submarine
-		fleet.put(4, new HashSet<Coordinate>()); // Battleship
-		fleet.put(5, new HashSet<Coordinate>()); // Aircraft carrier
-		*/
+	public ComputerPlayer(int size,String alias) {
+		super(size,alias);
 	}
 
 	@Override
@@ -58,8 +45,7 @@ public class ComputerPlayer extends Player {
 
 	@Override
 	public Coordinate generateMove(Map map) {
-		// TODO Auto-generated method stub
-		
+		map.drawGameMap();
 		int[] start = new int[2];
 		Boolean isValidMove = false;
 		
@@ -73,6 +59,7 @@ public class ComputerPlayer extends Player {
 			//Create the coordinate
 			c = new Coordinate(
 					Integer.valueOf(start[0]), Integer.valueOf(start[1]));
+		
 			
 			
 			isValidMove = map.isSquareNotHit(c);			

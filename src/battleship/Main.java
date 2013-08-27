@@ -82,71 +82,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Map humanMap=new Map(MapSize.LARGE);
-		Map computerMap=new Map(MapSize.LARGE);
-		
-		//TODO: Do we need a PLAYER object in the player object...
-		//		seems kinda redundant. Or should we just create the players as
-		//		humans or computers? (like below)
-		//TODO: fixed?
-		//HumanPlayer humanPlayer=new HumanPlayer();
-		//humanPlayer.placeShips(humanMap);
-		
-		Player BMO = new ComputerPlayer(MapSize.LARGE);
-		BMO.placeShips(computerMap);
+		int size = 10;
 
-		Player FINN = new HumanPlayer(MapSize.LARGE);
-		//FINN.placeShips(humanMap);
-		//computerMap.setForPlay();
-		//computerMap.drawSetupMap();
-		//computerMap.drawGameMap();
-		
-		//HumanPlayer human = new HumanPlayer();
-		
-		//switchFleet(human,computer);
-		switchFleet(BMO, FINN);
-
-		
-		int turn = 0;
-		Player ActivePlayer = FINN;
-		
-		//TODO: simple gameloop alpha version.
-		
-		/*while(!BMO.fleet.isEmpty() && !HAL.fleet.isEmpty() && turn<=100){ //while(true) should work as well. or while(turn <=100)
-			turn++;
-			ActivePlayer = player1;
-			if(player1.makeMove(humanMap)){
-				break;
-			}
-			humanMap.drawGameMap();
-			
-			ActivePlayer = player2;
-			if(player2.makeMove(computerMap)){
-				break;
-			}
-			computerMap.drawGameMap();
-		}*/
-
-		System.out.println(ActivePlayer.toString() +" vann!");
-		System.out.println("Det tog "+turn+" omgångar");
-			//computerMap.drawGameMap();
-		/*human.placeShips(humanMap);
-		humanMap.setForPlay();
-		humanMap.drawSetupMap();
-		*/
-	}
-	/**
-	 * Function used to switch the fleets of the players so that both players more easily can fire and make checks on the fleet the opponent placed.
-	 * TODO: as of now not viable solution for games over the internet.
-	 * TODO: should this be in player? 
-	 * @param Player p1 
-	 * @param Player p2
-	 */
-	private static void switchFleet(Player p1, Player p2){
-		HashMap<Integer, HashSet<Coordinate>> buffer = p1.fleet;
-		p1.fleet = p2.fleet;
-		p2.fleet = buffer;
-		buffer = null;
+		Player player1 = new ComputerPlayer(size,"HAL");
+		Player player2 = new ComputerPlayer(size,"BMO");
+		GameLoop game = new GameLoop(size, player1, player2);
 	}
 	
 	

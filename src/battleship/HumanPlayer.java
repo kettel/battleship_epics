@@ -21,17 +21,9 @@ public class HumanPlayer extends Player {
 	//input scanner :D
 	private Scanner scanner = new Scanner(System.in); 
 
-
-
-	public HumanPlayer(int size) {
+	public HumanPlayer(int size,String alias) {
 		//TODO: should this be in Player? ('Cause I presume its the same for all players)
-		super(size);
-		
-		fleet.put(2, new HashSet<Coordinate>()); // Patrol boat / Destroyer
-		fleet.put(3, new HashSet<Coordinate>()); // Destroyer / Cruiser
-		//fleet.put(3, new HashSet<Coordinate>()); // Submarine
-		//fleet.put(4, new HashSet<Coordinate>()); // Battleship
-		//fleet.put(5, new HashSet<Coordinate>()); // Aircraft carrier
+		super(size,alias);
 	}
 	
 	/**
@@ -39,7 +31,7 @@ public class HumanPlayer extends Player {
 	 * @return a coordinate 
 	 * @throws Exception - if input is not valid (ie not on form (int x), (int y))
 	 */
-	public Coordinate makeCoordinateFromInput() throws Exception{
+	private Coordinate makeCoordinateFromInput() throws Exception{
 		try{
 			//get input as string
 			String input = scanner.nextLine();

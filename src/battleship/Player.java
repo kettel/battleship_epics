@@ -19,12 +19,16 @@ public abstract class Player {
 	public static class FleetType {
 		public static int CLASSIC = 5;
 	}
+	private int nrHits = 0;
+	private int maxNrShips = 0;
+	private int nrRemainingShips = 0;
+	private String alias;
 
 	/**
 	 * constructor. of the superclass player. Get the fleet from a file and puts them in hashmap
 	 * @param size - the size of the map/board
 	 */
-	public Player(int size) {
+	public Player(int size, String name) {
 		try {
 			//create reader
 			BufferedReader in = new BufferedReader(new FileReader("Fleet.txt")); //"fleet.txt" should be a variable that get a fleet from any file (with fleet as a default prob.) 
@@ -62,8 +66,9 @@ public abstract class Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+		alias = name;
+
 	}
 	
 	/**
@@ -94,7 +99,7 @@ public abstract class Player {
 	 * @param direction - 0=vertical, 1=horizontal
 	 * @return true if the ship was placed, false if it could not be placed.
 	 */
-	public boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
+	protected boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
 
 		//Check if square and direction is placable
 		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
@@ -104,17 +109,25 @@ public abstract class Player {
 		//place the ship with the given parameters
 		if(direction == 0){
 			for (int i = 0; i < ship; i++) {
+				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
+				//put it on map
 				map.setShipOnSquare(startCoordinate.getX()+i, startCoordinate.getY());
+				maxNrShips++;
+				nrRemainingShips++; //add it to the number of ships
 			}
 			return true;
 		}
 		if(direction == 1){
 			for (int i = 0; i < ship; i++) {
+				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
+				//put it on map
 				map.setShipOnSquare(startCoordinate.getX(),startCoordinate.getY()+i);
+				maxNrShips++;
+				nrRemainingShips++; //add it to the number of ships
 			}
 			return true;
 		}
@@ -150,7 +163,7 @@ public abstract class Player {
 	 * the "fires shot" part of makeMove. Calls upon functions to set the shot on the map and to remove the ship (or ship-part) from the fleet  
 	 * @param c - the coordinate of the map
 	 * @param map -the map that shall be fired upon
-	 * @return true if the fleet is empty - all ships has been sunk and the game is over.
+	 * @return true if a ship was hit
 	 */
 	private boolean setHit(Coordinate c, Map map){
 		map.setHit(c);
@@ -160,24 +173,26 @@ public abstract class Player {
 	/**
 	 * Compares the coordinates of the shot with all coordinates of the fleet. If it's a hit - remove the ship from the fleet.
 	 * @param Coordinate c - the coordinate that has been shot 
-	 * @return true if the fleet is empty - all ships has been sunk
+	 * @return true if a ship was hit
 	 */
 	private boolean setHit(Coordinate c){
-		
+		Boolean isHit = false; //boolean that is used to check if the move was a hit 
 		
 		for (Integer ship : fleet.keySet()) { //for every ship in the fleet do:
 			
 			//Check if any coordinate in ship is the given coordinate
 			for(Coordinate coordinate : fleet.get(ship)){
 				if (c.isCoordinate(coordinate)){ //if coordinate in the ship, remove coordinate from ship
-					System.out.println("Träff!");
+					isHit = true;
+					nrHits++;
+					nrRemainingShips--;
 					fleet.get(ship).remove(coordinate);
 					
 					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
 						System.out.println("Skepp sänkt");
 						fleet.remove(ship);
 					}
-					return fleet.isEmpty();
+					return isHit;
 					
 				}
 			}
@@ -204,4 +219,25 @@ public abstract class Player {
 	 * @return the coordinate
 	 */
 	public abstract Coordinate generateMove(Map map);
+	
+	/**
+	 * @return the number of shots that has hit an enemy 
+	 */
+	public int getNrHits(){
+		return nrHits;
+	}
+	/**
+	 * @return the number of losses the fleet has suffered, amount of hits the enemy has had. 
+	 */
+	public int getNrLosses(){		
+		return maxNrShips-nrRemainingShips;
+	}
+
+	/**
+	 * @return the alias of this player
+	 */
+	public String getAlias() {
+		return alias;
+	}
+
 }
