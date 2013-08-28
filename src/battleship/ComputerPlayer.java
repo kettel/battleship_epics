@@ -36,7 +36,7 @@ public class ComputerPlayer extends Player {
 				// Random orientation (vertical/horizontal)
 				int orientation = 0 + (int)(Math.random()*2);
 				
-				isPlaced=checkAndPlace(map, ship[0], startCoordinate, orientation);
+				isPlaced=checkAndPlace(map, ship, startCoordinate, orientation);
 			}
 		}
 		map.drawSetupMap();

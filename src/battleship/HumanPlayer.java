@@ -65,7 +65,7 @@ public class HumanPlayer extends Player {
 					String input = scanner.nextLine();
 					input.split(",");
 				
-					isPlaced=checkAndPlace(map, ship[0], startCoordinate, Integer.parseInt(input));
+					isPlaced=checkAndPlace(map, ship, startCoordinate, Integer.parseInt(input));
 				
 				}catch(Exception e){
 					isPlaced = false;		

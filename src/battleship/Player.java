@@ -58,8 +58,8 @@ public abstract class Player {
 					fleet.put(shipController, new HashSet<Coordinate>());
 				}
 				else{ //If it's bigger then the board, print a message to the user
-					System.out.println("skepp av storlek " + shipLength+" är för stor för brädet.");
-					System.out.println("kommer ej att användas");
+					System.out.println("skepp av storlek " + shipLength+" ï¿½r fï¿½r stor fï¿½r brï¿½det.");
+					System.out.println("kommer ej att anvï¿½ndas");
 				}
 				
 			}
@@ -107,16 +107,17 @@ public abstract class Player {
 	 * @param direction - 0=vertical, 1=horizontal
 	 * @return true if the ship was placed, false if it could not be placed.
 	 */
-	protected boolean checkAndPlace(Map map, int ship, Coordinate startCoordinate, int direction){
+	protected boolean checkAndPlace(Map map, Integer[] ship, Coordinate startCoordinate, int direction){
 
 		//Check if square and direction is placable
-		if(map.checkIfPlacable(startCoordinate, direction, ship)==false){
+		if(map.checkIfPlacable(startCoordinate, direction, ship[0])==false){
 			return false;
 		}
 		
 		//place the ship with the given parameters
 		if(direction == 0){
-			for (int i = 0; i < ship; i++) {
+			// Iterate over the lenght of ship, therefor ship[0]
+			for (int i = 0; i < ship[0]; i++) {
 				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX()+i, startCoordinate.getY()));
@@ -128,7 +129,7 @@ public abstract class Player {
 			return true;
 		}
 		if(direction == 1){
-			for (int i = 0; i < ship; i++) {
+			for (int i = 0; i < ship[0]; i++) {
 				//add it to fleet
 				fleet.get(ship).add(
 						new Coordinate(startCoordinate.getX(), startCoordinate.getY()+i));
@@ -197,7 +198,7 @@ public abstract class Player {
 					fleet.get(ship).remove(coordinate);
 					
 					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
-						System.out.println("Skepp sänkt");
+						System.out.println("Skepp sï¿½nkt");
 						fleet.remove(ship);
 					}
 					return isHit;
