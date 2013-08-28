@@ -1,12 +1,9 @@
 package battleship;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import battleship.Map.MapSize;
 
 /*
  * Minimum:
@@ -32,7 +29,6 @@ import battleship.Map.MapSize;
  * 		[X] Basic textinput (x,y)
  * 			[X] incorrect input should be fixed
  * 			(TODO: Advanced placement w keyarrows)
- * 	  	TODO: Make support for another human player
  * 
  * TODO: Computer player.
  * 	[X] Place ships (random)
@@ -40,7 +36,7 @@ import battleship.Map.MapSize;
  * 	TODO: Make a move (pure random, peeking or something with memory?)
  * 		[X] random
  * 
- * TODO: Create a functioning game-loop ((preferably one that can be used both locally and over intewebs))
+ * [X] Create a functioning game-loop (not over internet)
  * 		***should probably not be a static thing. Alpha down below in main.
  * 		***should it be it's own object/class or something?
  * 
@@ -62,6 +58,11 @@ import battleship.Map.MapSize;
  * 		[ ] if you sink a ship you may fire again
  * 
  * TODO: Add support for more shiptypes <- begun
+ *	***can choose a different fleet***
+ *	[X] display all the ships in the active fleet
+ *	[X] create own fleet
+ * 
+ * 
  * TODO: Network-play !!! Will probably have to rewrite a lot !!!
  * TODO: Highscore
  * 	TODO: Store permanently on file.
@@ -75,6 +76,8 @@ import battleship.Map.MapSize;
 
 /**
  * Battleship, the game based on the movie with the same name.
+ * To create your own fleet to use add a new file in the BattleShip directory containing the lengths of all ships you want to use separated by commas
+ * (For example: a file containing "1,1,1,2,2,3,4,5" will create a fleet of 3 ships with length 1, two ships with length 2 and one ship each of length 3,4 and 5)
  * 
  * @author Victor,Wiktor
  *
@@ -88,6 +91,7 @@ public class Main {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
 
@@ -99,8 +103,8 @@ public class Main {
 		
 		printLogo();
 		
-		boolean quit = false;
-		while(!quit){
+		boolean quitMenu = false;
+		while(!quitMenu){
 			printMenu();
 			
 			try{
@@ -143,10 +147,10 @@ public class Main {
 					}
 					break;
 				case 4:
-					System.out.println("Lägg till skepp. NOT IMPLEMENTED!!");
+					chooseFleet();
 					break;
 				case 5:
-					chooseFleet();
+					System.out.println("Visa skepp. NOT IMPLEMENTED!!");
 					break;
 				case 6:
 					System.out.println("Visa highscore. NOT IMPLEMENTED!!");
@@ -156,11 +160,11 @@ public class Main {
 					// menu-options..
 					Player player1 = new ComputerPlayer(size,"HAL",source);
 					Player player2 = new ComputerPlayer(size,"BMO",source);
-					GameLoop game = new GameLoop(size, player1, player2);
+					new GameLoop(size, player1, player2);
 					break;
 				case 8:
 					System.out.println("Tråkigt att du vill avsluta, bye!");
-					quit = true;
+					quitMenu = true;
 					break;
 					
 				// Wrong menu-option (as integer)
@@ -192,17 +196,21 @@ public class Main {
 		System.out.println(" | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |");
 		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ ");
 		System.out.println("                                          |_|    ");
+		System.out.println("	-Based on a true story");
+		System.out.println();
 	}
 
 	/**
 	 * Print the menu
 	 */
 	private static void printMenu(){
+		
+		System.out.println("MENY:");
 		System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
 		System.out.println("2. Ändra antal mänskliga spelare. Nuvarande: "+ nofHumanPlayers);
 		System.out.println("3. Ändra antal datorspelare. Nuvarande: " + nofComputerPlayers);
-		System.out.println("4. Lista skepp. Nuvarande: NA");
-		System.out.println("5. Välj flotta. Nuvarande:" + source);
+		System.out.println("4. Välj flotta. Nuvarande:" + source);
+		System.out.println("5. Lista skepp i flottan.");
 		System.out.println("6. Se highscore.");
 		System.out.println("7. Starta spelet!");
 		System.out.println("8. Avsluta.");
@@ -223,6 +231,7 @@ public class Main {
 	private static void chooseFleet() {
 		// TODO Auto-generated method stub
 		System.out.println("Valbara flottor:");
+		@SuppressWarnings("resource")
 		Scanner stringScanner = new Scanner(System.in);
 		Boolean correct = false;
 		//list fleets
