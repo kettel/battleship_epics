@@ -1,10 +1,13 @@
 package battleship;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Map.Entry;
 import java.util.ArrayList;
@@ -206,6 +209,7 @@ public class Main {
 					break;
 					
 				case 8://define fleet
+					createFleet();
 					break;
 					
 				case 9://quit
@@ -227,9 +231,6 @@ public class Main {
 		
 	}
 	
-
-	
-
 
 	/**
 	 * print the logo
@@ -260,6 +261,17 @@ public class Main {
 		System.out.println("7. Starta spelet!");
 		System.out.println("8. Skapa en egen flotta ");
 		System.out.println("9. Avsluta");
+		System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
+	}
+	
+	/**
+	 * print the menu of the createFleet function
+	 */
+	private static void printCreateFleetMenu(){
+		System.out.println("Är du nöjd med denna flotta?");
+		System.out.println("1. \"Flottan var dålig, jag vill börja om!\"");
+		System.out.println("2. Spara flotta och återgå till huvudmenyn");
+		System.out.println("3. Återgå till huvudmenyn utan att spara flottan");
 		System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
 	}
 
@@ -370,8 +382,94 @@ public class Main {
 				 System.out.println();
 			}
 		} catch(Exception e){
-			//well, fuck
+			//should not happen
 		}
 	}
+	
+	/**
+	 * Function that let the user define his or her own fleet.
+	 */
+	private static void createFleet() {
+		String createdFleet="";
+		String input;
+		int lenght;
+		int amount;
+		Scanner scanner = new Scanner(System.in);
+		while(true){
+			try {
+				System.out.println("Hur lång vill du att skeppstypen skall vara? För att avsluta, tryck på enter utan att skriva i något.");
+				input = scanner.nextLine();
+				if (input.equals("")) {
+					break;
+				}else{
+					lenght = Integer.parseInt(input);
+				}
+				System.out.println("Hur många skepp du vill ha av den längden?");
+				amount = Integer.parseInt(scanner.nextLine());
+				//Add to string
+				for(int i = 0; i < amount; i++){
+					createdFleet = createdFleet + lenght+",";
+				}
+				} catch (InputMismatchException e) {
+					printNumberInputError();
+				} catch (NumberFormatException e){
+					System.out.println("Endast siffror!");
+				}
+			}
+		if(createdFleet.length()>0){
+			createdFleet = createdFleet.substring(0, createdFleet.length()-1);
+		}
+		System.out.println();
+		System.out.println("Flottan ser ut på följande sätt:");
+		String[] createdFleetArray = createdFleet.split(",");
+		for (int i = 0; i < createdFleetArray.length; i++) {
+			 for (int j = 0; j < Integer.parseInt(createdFleetArray[i]); j++) {
+				 System.out.print('#');					
+			}
+			 System.out.println();
+		}
+		printCreateFleetMenu();
+		boolean quit = false;
+		int inNumber;
+		while(!quit){
+			inNumber = scanner.nextInt();
+			
+			switch (inNumber) {
+			case 1:
+				quit = true;
+				createFleet(); //create a new fleet
+				break;
+			case 2:
+				saveFleet(createdFleet,scanner);
+			case 3:
+				quit = true;
+				break;
+			default:
+				break;
+				}
+			}
+		}
 
+	/**
+	 * save the fleet. get a name from the user and save the fleet as [name]Fleet.txt
+	 * @param createdFleetArray
+	 * @param scanner
+	 */
+	private static void saveFleet(String createdFleet, Scanner scanner) {
+		System.out.println("Spara flottan!");
+		System.out.println("Skriv in flottans namn:");
+		System.out.println("(Om du ger flottan samma namn som en redan existerande flotta skrivs den över)");
+		String name = scanner.next();
+		name = name+"Fleet.txt";
+		System.out.println("Flottan sparas i filen " +name);
+		try {
+			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(name, false)));
+			writer.print(createdFleet);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
 }
