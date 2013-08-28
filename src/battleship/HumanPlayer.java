@@ -104,4 +104,9 @@ public class HumanPlayer extends Player {
 		}
 		return coord;
 	}
+
+	@Override
+	public boolean isHuman() {
+		return true;
+	}
 }
