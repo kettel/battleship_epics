@@ -19,7 +19,7 @@ public class ComputerPlayer extends Player {
 
 	@Override
 	public void placeShips(Map map) {
-		for (Integer ship : fleet.keySet()) {
+		for (Integer[] ship : fleet.keySet()) {
 			isPlaced=false;
 			while(isPlaced == false){
 				int[] start = new int[2];
@@ -36,7 +36,7 @@ public class ComputerPlayer extends Player {
 				// Random orientation (vertical/horizontal)
 				int orientation = 0 + (int)(Math.random()*2);
 				
-				isPlaced=checkAndPlace(map, ship, startCoordinate, orientation);
+				isPlaced=checkAndPlace(map, ship[0], startCoordinate, orientation);
 			}
 		}
 		map.drawSetupMap();

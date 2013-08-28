@@ -61,7 +61,7 @@ public class GameLoop {
 	 */
 
 	private void switchFleet(Player player1, Player player2){
-		HashMap<Integer, HashSet<Coordinate>> buffer = player1.fleet;
+		HashMap<Integer[], HashSet<Coordinate>> buffer = player1.fleet;
 		player1.fleet = player2.fleet;
 		player2.fleet = buffer;
 		buffer = null;

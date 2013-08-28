@@ -22,7 +22,6 @@ public class HumanPlayer extends Player {
 	private Scanner scanner = new Scanner(System.in); 
 
 	public HumanPlayer(int size,String alias,String source) {
-		//TODO: should this be in Player? ('Cause I presume its the same for all players)
 		super(size,alias,source);
 	}
 	
@@ -50,11 +49,11 @@ public class HumanPlayer extends Player {
 	public void placeShips(Map map) {
 		
 		//place all the ships in the fleet
-		for (Integer ship : fleet.keySet()) {
+		for (Integer[] ship : fleet.keySet()) {
 			isPlaced=false;
 			// while the ship is not placed in a valid way
 			while(isPlaced == false){
-				System.out.println("Placera ut ett skepp med längden " + ship);
+				System.out.println("Placera ut ett skepp med längden " + ship[0]);
 				try{
 				
 					System.out.println("Ange startpunkt enligt formatet (x,y):");
@@ -66,7 +65,7 @@ public class HumanPlayer extends Player {
 					String input = scanner.nextLine();
 					input.split(",");
 				
-					isPlaced=checkAndPlace(map, ship, startCoordinate, Integer.parseInt(input));
+					isPlaced=checkAndPlace(map, ship[0], startCoordinate, Integer.parseInt(input));
 				
 				}catch(Exception e){
 					isPlaced = false;		

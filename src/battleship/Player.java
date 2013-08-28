@@ -15,10 +15,12 @@ import java.util.HashSet;
  *
  */
 public abstract class Player {
-	protected HashMap<Integer, HashSet<Coordinate>> fleet = new HashMap<Integer, HashSet<Coordinate>>();
+	protected HashMap<Integer[], HashSet<Coordinate>> fleet = new HashMap<Integer[], HashSet<Coordinate>>();
 	public static class FleetType {
 		public static int CLASSIC = 5;
 	}
+	
+	
 	private int nrHits = 0;
 	private int maxNrShips = 0;
 	private int nrRemainingShips = 0;
@@ -40,17 +42,23 @@ public abstract class Player {
 			String importString =in.readLine();
 			String[] importFleet = importString.split(",");
 			
-			int ship;
+			int shipLength;
+			int ctrl = 0;
 			
 			//for every ship-type in the "split string"
 			for (int i = 0; i < importFleet.length; i++) {
-				 ship = Integer.parseInt(importFleet[i]);
+				 shipLength = Integer.parseInt(importFleet[i]);
 				 //add a ship of that length to the fleet 
-				if (ship<=size) { //as long as it's smaller then the board
-					fleet.put(ship, new HashSet<Coordinate>());
+				if (shipLength<=size) { //as long as it's smaller then the board
+					
+					Integer[] shipController = new Integer[2];
+					shipController[0] = shipLength;
+					shipController[1]=ctrl;
+					ctrl++;
+					fleet.put(shipController, new HashSet<Coordinate>());
 				}
 				else{ //If it's bigger then the board, print a message to the user
-					System.out.println("skepp av storlek " + ship+" är för stor för brädet.");
+					System.out.println("skepp av storlek " + shipLength+" är för stor för brädet.");
 					System.out.println("kommer ej att användas");
 				}
 				
@@ -77,7 +85,7 @@ public abstract class Player {
 	 */
 	public HashSet<Coordinate> getCoordinates(){
 		HashSet<Coordinate> returnSet = new HashSet<Coordinate>();
-		for (Integer ship : fleet.keySet()) {
+		for (Integer[] ship : fleet.keySet()) {
 			returnSet.addAll(fleet.get(ship));
 		}
 		return returnSet;
@@ -142,7 +150,7 @@ public abstract class Player {
 	private boolean checkIfIsHit(Coordinate c){ //TODO: seems to be unused
 		
 		//For all ships in fleet
-		for (Integer ship : fleet.keySet()) {
+		for (Integer[] ship : fleet.keySet()) {
 			//Check if any coordinate in ship is the given coordinate
 			for(Coordinate coordinate : fleet.get(ship)){
 				if(c.isCoordinate(coordinate)){
@@ -178,7 +186,7 @@ public abstract class Player {
 	private boolean setHit(Coordinate c){
 		Boolean isHit = false; //boolean that is used to check if the move was a hit 
 		
-		for (Integer ship : fleet.keySet()) { //for every ship in the fleet do:
+		for (Integer[] ship : fleet.keySet()) { //for every ship in the fleet do:
 			
 			//Check if any coordinate in ship is the given coordinate
 			for(Coordinate coordinate : fleet.get(ship)){
