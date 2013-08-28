@@ -66,7 +66,7 @@ import java.util.TreeMap;
  * 		[ ] may fire three times per turn, but may not know what shot hit what (like "you fired at (0,0),(1,1),(2,2). You had 2 hits and 1 miss")
  * 		[ ] if you sink a ship you may fire again
  * 
- * TODO: Add support for more shiptypes <- begun
+ * [X] Add support for more shiptypes <- begun
  *	***can choose a different fleet***
  *	[X] display all the ships in the active fleet
  *	[X] create own fleet
@@ -102,14 +102,6 @@ public class Main {
 	 */
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		
-
-		//TODO:flyttar dem till innan spelloopen.
- 
-		/*Player player1 = new ComputerPlayer(size,"HAL",source);
-		Player player2 = new ComputerPlayer(size,"BMO",source);*/
-		 // Easy = 1, Medium = 2, Hard = 3. Set indivudually for each computer opponent?
-		
 		printLogo();
 		
 		boolean quitMenu = false;
