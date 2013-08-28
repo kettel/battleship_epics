@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -163,18 +165,24 @@ public class Main {
 					
 				case 6://show highscore
 					System.out.println("Highscore.");
+
+
+					ArrayList<HighscoreEntry> highscore = new ArrayList<HighscoreEntry>();
 					try {
-						TreeMap<Integer, String> mySortedScored = new TreeMap<Integer,String>();
 						BufferedReader br = new BufferedReader(new FileReader("highscore.txt"));
 						String line = br.readLine();
+
 						while(line != null){
 							String[] score = line.split(";");
-							mySortedScored.put(Integer.parseInt(score[1]),score[0]);
+							highscore.add(new HighscoreEntry(score[0],Integer.parseInt(score[1]),Long.parseLong(score[2])));
 							line = br.readLine();
 						}
+						br.close();
+						Collections.sort(highscore);
 						int i = 1;
-						for (Entry<Integer, String> entry : mySortedScored.entrySet()) {
-							System.out.println(i + ": " + entry.getKey() + "-> " + entry.getValue());
+						for (HighscoreEntry entry : highscore) {
+							java.util.Date time=new java.util.Date((long)entry.timestamp());
+							System.out.println(i + ": " + entry.nofTurns() + " <- " + entry.alias() + " @ " + time);
 							i++;
 						}
 					} catch (IOException e) {

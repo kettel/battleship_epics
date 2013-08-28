@@ -1,12 +1,22 @@
 package battleship;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
 
 /**
  * Class with functions 
@@ -47,20 +57,70 @@ public class GameLoop {
 		
 		
 		// If winner is human, print to highscore	
-		if(winner.isHuman()){
-			try {
-				PrintWriter writer;
-				writer = new PrintWriter(new BufferedWriter(new FileWriter("highscore.txt", true)));
-				writer.append(winner.getAlias() + ";" + turn + ";" + System.currentTimeMillis() + "\n");
-				writer.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		//if(winner.isHuman()){
+			checkHighscore(winner.getAlias(), turn);
+		//}
 		
 		//After game: highscore time :D
 	}
+	
+	private void checkHighscore(String winnerAlias, int nofTurns){
+		ArrayList<HighscoreEntry> currentHighscore = readHighscore();
+		if(currentHighscore.isEmpty()){
+			currentHighscore.add(new HighscoreEntry(winnerAlias, nofTurns, System.currentTimeMillis()));
+			Collections.sort(currentHighscore);
+			printToHighscore(currentHighscore);
+		}else{
+			int worstHighscore = currentHighscore.get(currentHighscore.size()-1).nofTurns();
+			if(nofTurns <= worstHighscore) {
+				currentHighscore.add(new HighscoreEntry(winnerAlias, nofTurns, System.currentTimeMillis()));
+				Collections.sort(currentHighscore);
+				printToHighscore(currentHighscore);
+			}
+		}
+	}
+	
+	private void printToHighscore(ArrayList<HighscoreEntry> highscore) {
+		try {
+			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("highscore.txt", false)));
+			int i = 0;
+			for (HighscoreEntry entry : highscore) {
+				// Fugly way of breaking the highscore-writing after 10 entries
+				if(i == 10){
+					break;
+				}
+				writer.append(entry.alias() + ";" + entry.nofTurns() +";" + entry.timestamp() + "\n");
+				i++;
+				
+			}
+			writer.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<HighscoreEntry> readHighscore(){
+		ArrayList<HighscoreEntry> highscore = new ArrayList<HighscoreEntry>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("highscore.txt"));
+			String line = br.readLine();
+			
+			while(line != null){
+				String[] score = line.split(";");
+				highscore.add(new HighscoreEntry(score[0],Integer.parseInt(score[1]),Long.parseLong(score[2])));
+				line = br.readLine();
+			}
+			br.close();
+			Collections.sort(highscore);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return highscore;
+	}
+	
 	/**
 	 * Sets up the map for a player - create it, place the ships etc. 
 	 * @param size of the map
