@@ -38,7 +38,7 @@ public class HumanPlayer extends Player {
 			String[] start = input.split(",");
 			
 			//create and return coordinate by parsing the split strings
-			return new Coordinate(Integer.parseInt(start[0]), Integer.parseInt(start[1])); //this part will most likely throw the exception
+			return new Coordinate(Integer.parseInt(start[0]), Integer.parseInt(start[1])); //this part is most likely to throw a exception
 		} catch(Exception e){
 			System.out.println(e);
 			throw new Exception();
