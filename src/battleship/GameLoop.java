@@ -1,5 +1,10 @@
 package battleship;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -38,7 +43,22 @@ public class GameLoop {
 		//Begin gameloop (as in main)
 		Player winner = playGame(size);
 		System.out.println(winner.getAlias() + " vann!");
-		System.out.println("Det tog "+ turn+" omgångar!");
+		System.out.println("Det tog "+ turn+" omgÃ¥ngar!");
+		
+		
+		// If winner is human, print to highscore	
+		if(winner.isHuman()){
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(new BufferedWriter(new FileWriter("highscore.txt", true)));
+				writer.append(winner.getAlias() + ";" + turn + ";" + System.currentTimeMillis() + "\n");
+				writer.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		//After game: highscore time :D
 	}
 	/**
@@ -78,13 +98,13 @@ public class GameLoop {
 		while (turn<=maxTurns) {
 			//start turn
 			turn++; //next turn
-			System.out.println("Omgång "+turn);
+			System.out.println("Omgï¿½ng "+turn);
 			System.out.println("Statistik");
 			displayStatistics(); //print hit- & loss percentage for both players
 			//Player1 make its move
 			activePlayer = player1;
 			if (player1.makeMove(map2)) { //if move hits
-				System.out.println("Träff!");
+				System.out.println("Trï¿½ff!");
 				if(player1.fleet.isEmpty()){ //if all ships has been sunk
 					break;
 				}
@@ -92,7 +112,7 @@ public class GameLoop {
 			//Player2 make its move
 			activePlayer = player2;
 			if(player2.makeMove(map1)){ //if move hits
-				System.out.println("Träff!");
+				System.out.println("Trï¿½ff!");
 				if(player2.fleet.isEmpty()){ //if all ships has been sunk
 					break;
 				}
@@ -111,11 +131,11 @@ public class GameLoop {
 	private void displayStatistics() {
 		//player1
 		System.out.println(player1.getAlias());
-		System.out.println("träffprocent: "+(float)player1.getNrHits()*100/turn);
-		System.out.println("förlustprocent: "+(float)player2.getNrLosses()*100/turn);
+		System.out.println("trï¿½ffprocent: "+(float)player1.getNrHits()*100/turn);
+		System.out.println("fï¿½rlustprocent: "+(float)player2.getNrLosses()*100/turn);
 		//player2
 		System.out.println(player2.getAlias());
-		System.out.println("träffprocent: "+(float)player2.getNrHits()*100/turn);
-		System.out.println("förlustprocent: "+(float)player1.getNrLosses()*100/turn);
+		System.out.println("trï¿½ffprocent: "+(float)player2.getNrHits()*100/turn);
+		System.out.println("fï¿½rlustprocent: "+(float)player1.getNrLosses()*100/turn);
 	}
 }

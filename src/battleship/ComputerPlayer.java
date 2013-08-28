@@ -69,4 +69,9 @@ public class ComputerPlayer extends Player {
 		return c;
 	}
 
+	@Override
+	public boolean isHuman() {
+		return false;
+	}
+
 }

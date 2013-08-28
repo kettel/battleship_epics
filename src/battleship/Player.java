@@ -25,7 +25,9 @@ public abstract class Player {
 	private int maxNrShips = 0;
 	private int nrRemainingShips = 0;
 	private String alias;
-
+	
+	
+	
 	/**
 	 * constructor. of the superclass player. Get the fleet from a file and puts them in hashmap
 	 * @param size - the size of the map/board
@@ -228,6 +230,12 @@ public abstract class Player {
 	 * @return the coordinate
 	 */
 	public abstract Coordinate generateMove(Map map);
+	
+	/**
+	 * 
+	 * @return if player is controlled by human or not
+	 */
+	public abstract boolean isHuman();
 	
 	/**
 	 * @return the number of shots that has hit an enemy 
