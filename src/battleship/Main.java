@@ -2,9 +2,13 @@ package battleship;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 
 /*
@@ -163,7 +167,26 @@ public class Main {
 					break;
 					
 				case 6://show highscore
-					System.out.println("Visa highscore. NOT IMPLEMENTED!!");
+					System.out.println("Highscore.");
+					try {
+						TreeMap<Integer, String> mySortedScored = new TreeMap<Integer,String>();
+						BufferedReader br = new BufferedReader(new FileReader("highscore.txt"));
+						String line = br.readLine();
+						while(line != null){
+							String[] score = line.split(";");
+							mySortedScored.put(Integer.parseInt(score[1]),score[0]);
+							line = br.readLine();
+						}
+						int i = 1;
+						for (Entry<Integer, String> entry : mySortedScored.entrySet()) {
+							System.out.println(i + ": " + entry.getKey() + "-> " + entry.getValue());
+							i++;
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					break;
 					
 				case 7://start game
