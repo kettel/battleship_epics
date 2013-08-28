@@ -100,7 +100,6 @@ public class HumanPlayer extends Player {
 				//input error - might give us problem if the scanner for some reason is closed...
 				isValidMove = false;
 				System.out.println("input error2 - please try again");
-				//scanner.next();
 			}
 			
 		}
