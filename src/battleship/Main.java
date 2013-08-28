@@ -92,12 +92,12 @@ public class Main {
 		
 		Player player1 = new ComputerPlayer("HAL");
 		Player player2 = new ComputerPlayer("BMO");
-		System.out.println("  ____        _   _   _       __ _      _     _ ");
-		System.out.println(" | __ )  __ _| |_| |_| | ___ / _(_) ___| | __| |");
-		System.out.println(" |  _ \\ / _` | __| __| |/ _ \\ |_| |/ _ \\ |/ _` |");
-		System.out.println(" | |_) | (_| | |_| |_| |  __/  _| |  __/ | (_| |");
-		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|_| |_|\\___|_|\\__,_|");
-		System.out.println("  ");
+		System.out.println("  ____        _   _   _      ____  _     _       ");
+		System.out.println(" | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __  ");
+		System.out.println(" |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\ ");
+		System.out.println(" | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |");
+		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ ");
+		System.out.println("                                          |_|    ");
 		boolean quit = false;
 		while(!quit){
 			System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
