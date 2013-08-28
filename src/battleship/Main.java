@@ -1,6 +1,8 @@
 package battleship;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -112,6 +114,7 @@ public class Main {
 				int inNumber = scanner.nextInt();
 				//scanner.close(); // Will close close ALL system.in reading??
 				switch (inNumber) {
+				
 				case 1: //Spelplan
 					System.out.println("Ange ny storlek på spelplan: ");
 					try{
@@ -126,7 +129,8 @@ public class Main {
 						
 					}
 					break;
-				case 2:
+					
+				case 2: //nrHumanplayers
 					System.out.println("Ange antal mänskliga spelare: ");
 					try{
 						Scanner intScanner = new Scanner(System.in);
@@ -136,7 +140,8 @@ public class Main {
 						printNumberInputError();
 					}
 					break;
-				case 3:
+					
+				case 3: //nrComputerPlayers
 					System.out.println("Ange antal datorspelare: ");
 					try{
 						Scanner intScanner = new Scanner(System.in);
@@ -146,23 +151,33 @@ public class Main {
 						printNumberInputError();
 					}
 					break;
-				case 4:
+					
+				case 4: //choose which fleet to use
 					chooseFleet();
 					break;
-				case 5:
-					System.out.println("Visa skepp. NOT IMPLEMENTED!!");
+					
+				case 5: //show ships in fleet
+					System.out.println("Visar skepp i flotta:");
+					showFleet();
+					System.out.println("Varje # representerar en ruta på spelplanen");
 					break;
-				case 6:
+					
+				case 6://show highscore
 					System.out.println("Visa highscore. NOT IMPLEMENTED!!");
 					break;
-				case 7:
+					
+				case 7://start game
 					// Non-interactive way of starting the game. Just does not care about 
 					// menu-options..
 					Player player1 = new ComputerPlayer(size,"HAL",source);
 					Player player2 = new ComputerPlayer(size,"BMO",source);
 					new GameLoop(size, player1, player2);
 					break;
-				case 8:
+					
+				case 8://define fleet
+					break;
+					
+				case 9://quit
 					System.out.println("Tråkigt att du vill avsluta, bye!");
 					quitMenu = true;
 					break;
@@ -197,23 +212,23 @@ public class Main {
 		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ ");
 		System.out.println("                                          |_|    ");
 		System.out.println("	-Based on a true story");
-		System.out.println();
 	}
 
 	/**
 	 * Print the menu
 	 */
 	private static void printMenu(){
-		
+		System.out.println();
 		System.out.println("MENY:");
 		System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
 		System.out.println("2. Ändra antal mänskliga spelare. Nuvarande: "+ nofHumanPlayers);
 		System.out.println("3. Ändra antal datorspelare. Nuvarande: " + nofComputerPlayers);
 		System.out.println("4. Välj flotta. Nuvarande:" + source);
-		System.out.println("5. Lista skepp i flottan.");
-		System.out.println("6. Se highscore.");
+		System.out.println("5. Lista skepp i flottan");
+		System.out.println("6. Se highscore");
 		System.out.println("7. Starta spelet!");
-		System.out.println("8. Avsluta.");
+		System.out.println("8. Skapa en egen flotta ");
+		System.out.println("9. Avsluta");
 		System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
 	}
 
@@ -268,10 +283,11 @@ public class Main {
 			if (listOfFiles[i].isFile()) { //if it's a file...
 				fileName = listOfFiles[i].getName(); //get name of file
 				if (fileName.endsWith("Fleet.txt")){ //if it's a Fleet
-					System.out.println(fileName); //print name
+					System.out.println("> "+fileName); //print name
 					}
 				}
 			}
+		System.out.println();
 		}
 	
 	/**
@@ -296,8 +312,35 @@ public class Main {
 			}
 		if(!correctName){
 			System.out.println("Felaktigt namn, var god försök igen");
-		}
+			}
 		return correctName;
 		}
+	
+	/**
+	 * Show the ship in the current active fleet.
+	 */
+	private static void showFleet(){
+		try {
+			//create reader
+			BufferedReader in = new BufferedReader(new FileReader(source)); 
+			
+			while(!in.ready()){
+				//wait until reader is ready.
+			}
+			//import the first line and split it
+			String importString =in.readLine();
+			String[] importFleet = importString.split(",");
+			
+			//for every ship-type in the "split string"
+			for (int i = 0; i < importFleet.length; i++) {
+				 for (int j = 0; j < Integer.parseInt(importFleet[i]); j++) {
+					 System.out.print('#');					
+				}
+				 System.out.println();
+			}
+		} catch(Exception e){
+			//well, fuck
+		}
+	}
 
 }

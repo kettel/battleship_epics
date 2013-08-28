@@ -33,7 +33,7 @@ public abstract class Player {
 	public Player(int size, String name, String source) {
 		try {
 			//create reader
-			BufferedReader in = new BufferedReader(new FileReader(source)); //"fleet.txt" should be a variable that get a fleet from any file (with fleet as a default prob.) 
+			BufferedReader in = new BufferedReader(new FileReader(source)); 
 			
 			while(!in.ready()){
 				//wait until reader is ready.
