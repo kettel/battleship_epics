@@ -1,5 +1,6 @@
 package battleship;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.InputMismatchException;
@@ -79,42 +80,28 @@ import battleship.Map.MapSize;
  *
  */
 public class Main {
-
+		static int size = 10;
+		static String source = "defaultFleet.txt";
+		static int nofHumanPlayers = 0;
+		static int nofComputerPlayers = 0;
+		static int computerSkill = 0;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int size = 10;
-		String source = "fleet.txt";
+		
 
-		Player player1 = new ComputerPlayer(size,"HAL",source);
-		Player player2 = new ComputerPlayer(size,"BMO",source);
-		int nofHumanPlayers = 0;
-		int nofComputerPlayers = 0;
-		int computerSkill = 0; // Easy = 1, Medium = 2, Hard = 3. Set indivudually for each computer opponent?
+		//TODO:flyttar dem till innan spelloopen.
+ 
+		/*Player player1 = new ComputerPlayer(size,"HAL",source);
+		Player player2 = new ComputerPlayer(size,"BMO",source);*/
+		 // Easy = 1, Medium = 2, Hard = 3. Set indivudually for each computer opponent?
 		
-		 
+		printLogo();
 		
-		//Player player1 = new ComputerPlayer("HAL");
-		//Player player2 = new ComputerPlayer("BMO");
-		
-		System.out.println("  ____        _   _   _      ____  _     _       ");
-		System.out.println(" | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __  ");
-		System.out.println(" |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\ ");
-		System.out.println(" | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |");
-		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ ");
-		System.out.println("                                          |_|    ");
 		boolean quit = false;
 		while(!quit){
-			System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
-			System.out.println("2. Ändra antal mänskliga spelare. Nuvarande: "+ nofHumanPlayers);
-			System.out.println("3. Ändra antal datorspelare. Nuvarande: " + nofComputerPlayers);
-			System.out.println("4. Lägg till skepp. Nuvarande: NA");
-			System.out.println("5. Lista skepp. Nuvarande: NA");
-			System.out.println("6. Se highscore.");
-			System.out.println("7. Starta spelet!");
-			System.out.println("8. Avsluta.");
-			System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
+			printMenu();
 			
 			try{
 				Scanner scanner = new Scanner(System.in);
@@ -131,7 +118,8 @@ public class Main {
 						//intScanner.close();
 					}
 					catch(InputMismatchException err){
-						System.out.println("Du måste ange ett giltigt nummer, var god försök igen.");
+						printNumberInputError();
+						
 					}
 					break;
 				case 2:
@@ -141,7 +129,7 @@ public class Main {
 						nofHumanPlayers = intScanner.nextInt();
 					}
 					catch(InputMismatchException err){
-						System.out.println("Du måste ange ett giltigt nummer, var god försök igen.");
+						printNumberInputError();
 					}
 					break;
 				case 3:
@@ -151,14 +139,14 @@ public class Main {
 						nofComputerPlayers = intScanner.nextInt();
 					}
 					catch(InputMismatchException err){
-						System.out.println("Du måste ange ett giltigt nummer, var god försök igen.");
+						printNumberInputError();
 					}
 					break;
 				case 4:
 					System.out.println("Lägg till skepp. NOT IMPLEMENTED!!");
 					break;
 				case 5:
-					System.out.println("Visa skepp. NOT IMPLEMENTED!!");
+					chooseFleet();
 					break;
 				case 6:
 					System.out.println("Visa highscore. NOT IMPLEMENTED!!");
@@ -166,6 +154,8 @@ public class Main {
 				case 7:
 					// Non-interactive way of starting the game. Just does not care about 
 					// menu-options..
+					Player player1 = new ComputerPlayer(size,"HAL",source);
+					Player player2 = new ComputerPlayer(size,"BMO",source);
 					GameLoop game = new GameLoop(size, player1, player2);
 					break;
 				case 8:
@@ -175,19 +165,130 @@ public class Main {
 					
 				// Wrong menu-option (as integer)
 				default:
-					System.out.println("Du skrev in i ett ogiltigt menyval. Försök igen!");
+					printNumberInputError();
 					break;
 				}
 			}
 			catch(InputMismatchException err){
 				// Not a number entered as menu-option
-				System.out.println("Du måste ange ett val som ett heltal. Försök igen!");
-			}
-			
+				printNumberInputError();
+				}
 		}
 		
 	}
 	
+
 	
+
+
+	/**
+	 * print the logo
+	 */
+	private static void printLogo() {
+		// TODO Auto-generated method stub
+		System.out.println("  ____        _   _   _      ____  _     _       ");
+		System.out.println(" | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __  ");
+		System.out.println(" |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\ ");
+		System.out.println(" | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |");
+		System.out.println(" |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ ");
+		System.out.println("                                          |_|    ");
+	}
+
+	/**
+	 * Print the menu
+	 */
+	private static void printMenu(){
+		System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
+		System.out.println("2. Ändra antal mänskliga spelare. Nuvarande: "+ nofHumanPlayers);
+		System.out.println("3. Ändra antal datorspelare. Nuvarande: " + nofComputerPlayers);
+		System.out.println("4. Lista skepp. Nuvarande: NA");
+		System.out.println("5. Välj flotta. Nuvarande:" + source);
+		System.out.println("6. Se highscore.");
+		System.out.println("7. Starta spelet!");
+		System.out.println("8. Avsluta.");
+		System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
+	}
+
+	/**
+	 * print a message to the user if the input is incorrect
+	 */
+	private static void printNumberInputError() {
+		// TODO Auto-generated method stub
+		System.out.println("Du måste ange ett giltigt nummer, var god försök igen.");
+	}
+	
+	/**
+	 * function to change the source-file and thereby change the fleet used in the game
+	 */
+	private static void chooseFleet() {
+		// TODO Auto-generated method stub
+		System.out.println("Valbara flottor:");
+		Scanner stringScanner = new Scanner(System.in);
+		Boolean correct = false;
+		//list fleets
+		listFleets();
+		String newSource;
+		try {
+			while(!correct){
+				System.out.println("Välj vilken flotta du vill använda - skriv in fullständiga namnet, inkulsive Fleet.txt ");
+				System.out.println("Trycker du på enter utan att skriva in namnet på någon flotta kommer defaultFleet.txt att användas.");
+				newSource = stringScanner.nextLine();
+				if(newSource.equals("") || newSource == null){
+					source = "defaultFleet.txt";
+					break;
+				}
+				correct = checkFleet(newSource);
+				if(correct){
+					source=newSource;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	/**
+	 * Function used to list the fleets (= files in the directory whose name ends with Fleet.txt)
+	 */
+	private static void listFleets() {
+		String path = "."; //current directory
+		String fileName;
+		File folder = new File(path); //get folder from directory
+		File[] listOfFiles = folder.listFiles(); //get list files from folder 
+		for (int i = 0; i < listOfFiles.length; i++){ //for each file in the list
+			if (listOfFiles[i].isFile()) { //if it's a file...
+				fileName = listOfFiles[i].getName(); //get name of file
+				if (fileName.endsWith("Fleet.txt")){ //if it's a Fleet
+					System.out.println(fileName); //print name
+					}
+				}
+			}
+		}
+	
+	/**
+	 * Checks if the name of the fleet is among the files that end with Fleet.txt 
+	 * @param fleetName - the name of the fleet the user want to use.
+	 * @return true if the name is among the Fleets.txt:s
+	 */
+	private static boolean checkFleet(String fleetName) {
+		Boolean correctName=false;
+		String path = "."; //current directory
+		File folder = new File(path); //get folder from directory
+		File[] listOfFiles = folder.listFiles(); //get list files from folder 
+		for (int i = 0; i < listOfFiles.length; i++){ //for each file in the list
+			if (listOfFiles[i].isFile()) { //if it's a file...
+				if (listOfFiles[i].getName().endsWith("Fleet.txt")){ //if it's a Fleet
+					if(listOfFiles[i].getName().equals(fleetName)){ //if the chosen fleetname is among the files
+						correctName = true; //the name is correct - break the loop
+						break;
+						}
+					}
+				}
+			}
+		if(!correctName){
+			System.out.println("Felaktigt namn, var god försök igen");
+		}
+		return correctName;
+		}
 
 }
