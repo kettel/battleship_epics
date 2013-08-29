@@ -11,52 +11,6 @@ import java.util.InputMismatchException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
-
-/*
- * Minimum:
- * TODO: Comment. Oh THE COMMENT!
- *  
- * [X] Make the game follow teh rulez
- * [X] boats at least placed 1 square away from each other - fixed for human and computer alike
- * 	[X] Create a way to compare two coordinates
- * 		*** Created the isCoordinate (better name?) functions in coordinate ***
- * 
- * [X] super: Player
- * [X] draw board for players
- * [X] MakeMove - a super one - should probably be the same for both human and computer
- * 		***works for the human player***
- * 		***computerplayer got a randomized version***
- * 
- * 
- * 
- * [X] Human Player:
- *	[X] Draw player entered ship on board.
- * 	[X]: Make a move
-  	* 	[X] Handle collisions (if we with collision meant "the same player hitting on the same square twice" or something like that)
- * 		[X] Basic textinput (x,y)
- * 			[X] incorrect input should be fixed
- * 
- * [X] Computer player.
- * 	[X] Place ships (random)
- * 
- * 	[X] Make a move (pure random, peeking or something with memory?)
- * 		[X] random
- * 
- * [X] Create a functioning game-loop (not over internet)
- * 		***should probably not be a static thing. Alpha down below in main.
- * 		***should it be it's own object/class or something?
- * 
- * [X] Determine winner.
- * [X] Count misses
- * [X] Count hits.
- * 
- * TODO: Design
- *	TODO: Make UML
- * 
- */
-
-
 /**
  * Battleship, the game based on the movie with the same name.
  * To create your own fleet to use add a new file in the BattleShip directory containing the lengths of all ships you want to use separated by commas
