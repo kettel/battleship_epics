@@ -103,9 +103,10 @@ public class GameLoop {
 				
 			}
 			writer.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("highscore.txt hittades inte. Skapar filen.");
+			//e.printStackTrace();
 		}
 	}
 
@@ -128,8 +129,8 @@ public class GameLoop {
 			Collections.sort(highscore);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// No highscore found, will be created
+			System.out.println("Skapar en ny highscore.txt...");
 		}
 		return highscore;
 	}
