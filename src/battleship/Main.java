@@ -61,7 +61,7 @@ import java.util.Scanner;
  * Battleship, the game based on the movie with the same name.
  * To create your own fleet to use add a new file in the BattleShip directory containing the lengths of all ships you want to use separated by commas
  * (For example: a file containing "1,1,1,2,2,3,4,5" will create a fleet of 3 ships with length 1, two ships with length 2 and one ship each of length 3,4 and 5)
- * I you want to use a different fleet on startup, change the sourcestring to your Fleet of choice
+ * I you want to use a different fleet on startup, change the "source"-string to your Fleet of choice. Or change the values in he default string.
  * @author Victor,Wiktor
  *
  */
@@ -69,7 +69,6 @@ public class Main {
 		static int size = 10;
 		static String source = "defaultFleet.txt";
 		static int nofHumanPlayers = 0;
-		static int nofComputerPlayers = 0;
 		static int computerSkill = 0;
 	/**
 	 * @param args
@@ -104,38 +103,34 @@ public class Main {
 					break;
 					
 				case 2: //nrHumanplayers
-					System.out.println("Ange antal mänskliga spelare: ");
+					System.out.println("Ange antal mänskliga spelare, mellan 0 och 2: ");
 					try{
 						Scanner intScanner = new Scanner(System.in);
 						nofHumanPlayers = intScanner.nextInt();
+						if (nofHumanPlayers > 2) {
+							System.out.println("Inte fler än två spelare");
+							nofHumanPlayers = 2;
+						} else if(nofHumanPlayers < 0){
+							System.out.println("Inte färre än noll spelare");
+							nofHumanPlayers = 0;
+						}
 					}
 					catch(InputMismatchException err){
 						printNumberInputError();
 					}
 					break;
 					
-				case 3: //nrComputerPlayers
-					System.out.println("Ange antal datorspelare: ");
-					try{
-						Scanner intScanner = new Scanner(System.in);
-						nofComputerPlayers = intScanner.nextInt();
-					}
-					catch(InputMismatchException err){
-						printNumberInputError();
-					}
-					break;
-					
-				case 4: //choose which fleet to use
+				case 3: //choose which fleet to use
 					chooseFleet();
 					break;
 					
-				case 5: //show ships in fleet
+				case 4: //show ships in fleet
 					System.out.println("Visar skepp i flotta:");
 					showFleet();
 					System.out.println("Varje # representerar en ruta på spelplanen");
 					break;
 					
-				case 6://show highscore
+				case 5://show highscore
 					System.out.println("Highscore.");
 
 
@@ -164,17 +159,17 @@ public class Main {
 					
 					break;
 					
-				case 7://start game
+				case 6://start game
 					// Non-interactive way of starting the game. Just does not care about 
 					// menu-options..
 					setupGame();
 					break;
 					
-				case 8://define fleet
+				case 7://define fleet
 					createFleet();
 					break;
 					
-				case 9://quit
+				case 0://quit
 					System.out.println("Tråkigt att du vill avsluta, bye!");
 					quitMenu = true;
 					break;
@@ -215,13 +210,12 @@ public class Main {
 		System.out.println("MENY:");
 		System.out.println("1. Ändra storlek på spelplan. Nuvarande: " + size);
 		System.out.println("2. Ändra antal mänskliga spelare. Nuvarande: "+ nofHumanPlayers);
-		System.out.println("3. Ändra antal datorspelare. Nuvarande: " + nofComputerPlayers);
-		System.out.println("4. Välj flotta. Nuvarande:" + source);
-		System.out.println("5. Lista skepp i flottan");
-		System.out.println("6. Se highscore");
-		System.out.println("7. Starta spelet!");
-		System.out.println("8. Skapa en egen flotta ");
-		System.out.println("9. Avsluta");
+		System.out.println("3. Välj flotta. Nuvarande:" + source);
+		System.out.println("4. Lista skepp i flottan");
+		System.out.println("5. Se highscore");
+		System.out.println("6. Starta spelet!");
+		System.out.println("7. Skapa en egen flotta ");
+		System.out.println("0. Avsluta");
 		System.out.println("Ange ditt val som ett heltal, bekräfta med enter:");
 	}
 	
