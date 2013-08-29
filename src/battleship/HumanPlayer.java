@@ -74,6 +74,7 @@ public class HumanPlayer extends Player {
 				}
 			}
 		}	
+		map.drawGameMap();
 		System.out.println("Tryck på enter för att fortsätta.");
 		scanner.nextLine();
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -96,7 +97,7 @@ public class HumanPlayer extends Player {
 				//Check if input is valid
 				isValidMove = map.isSquareNotHit(coord);
 				if(!isValidMove){
-					System.out.println("Inte ett godk�nt drag - g�r om, g�r r�tt"); //Motivate the player to make a correct move
+					System.out.println("Inte ett godkänt drag - gör om, gör rätt"); //Motivate the player to make a correct move
 				}
 			} catch (Exception e) {
 				//input error - might give us problem if the scanner for some reason is closed...

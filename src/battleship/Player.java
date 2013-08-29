@@ -60,8 +60,8 @@ public abstract class Player {
 					fleet.put(shipController, new HashSet<Coordinate>());
 				}
 				else{ //If it's bigger then the board, print a message to the user
-					System.out.println("skepp av storlek " + shipLength+" �r f�r stor f�r br�det.");
-					System.out.println("kommer ej att anv�ndas");
+					System.out.println("Skepp av storlek " + shipLength+" är för stor för brädet.");
+					System.out.println("Det kommer ej att användas");
 				}
 				
 			}
@@ -200,7 +200,7 @@ public abstract class Player {
 					fleet.get(ship).remove(coordinate);
 					
 					if (fleet.get(ship).isEmpty()) { //if the ship is empty - ship is sunk
-						System.out.println("Skepp s�nkt");
+						System.out.println("Skepp sänkt");
 						fleet.remove(ship);
 					}
 					return isHit;

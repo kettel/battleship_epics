@@ -57,9 +57,9 @@ public class GameLoop {
 		
 		
 		// If winner is human, print to highscore if score is good enough	
-		//if(winner.isHuman()){
+		if(winner.isHuman()){
 			checkHighscore(winner.getAlias(), turn);
-		//}
+		}
 		
 		//After game: highscore time :D
 	}
@@ -172,13 +172,13 @@ public class GameLoop {
 		while (turn<=maxTurns) {
 			//start turn
 			turn++; //next turn
-			System.out.println("Omg�ng "+turn);
+			System.out.println("Omgång "+turn);
 			System.out.println("Statistik");
 			displayStatistics(); //print hit- & loss percentage for both players
 			//Player1 make its move
 			activePlayer = player1;
 			if (player1.makeMove(map2)) { //if move hits
-				System.out.println("Tr�ff!");
+				System.out.println("Träff!");
 				if(player1.fleet.isEmpty()){ //if all ships has been sunk
 					break;
 				}
@@ -186,7 +186,7 @@ public class GameLoop {
 			//Player2 make its move
 			activePlayer = player2;
 			if(player2.makeMove(map1)){ //if move hits
-				System.out.println("Tr�ff!");
+				System.out.println("Träff!");
 				if(player2.fleet.isEmpty()){ //if all ships has been sunk
 					break;
 				}
@@ -205,11 +205,11 @@ public class GameLoop {
 	private void displayStatistics() {
 		//player1
 		System.out.println(player1.getAlias());
-		System.out.println("tr�ffprocent: "+(float)player1.getNrHits()*100/turn);
-		System.out.println("f�rlustprocent: "+(float)player2.getNrLosses()*100/turn);
+		System.out.println("Träffprocent: "+(float)player1.getNrHits()*100/turn);
+		System.out.println("Förlustprocent: "+(float)player2.getNrLosses()*100/turn);
 		//player2
 		System.out.println(player2.getAlias());
-		System.out.println("tr�ffprocent: "+(float)player2.getNrHits()*100/turn);
-		System.out.println("f�rlustprocent: "+(float)player1.getNrLosses()*100/turn);
+		System.out.println("Träffprocent: "+(float)player2.getNrHits()*100/turn);
+		System.out.println("Förlustprocent: "+(float)player1.getNrLosses()*100/turn);
 	}
 }
