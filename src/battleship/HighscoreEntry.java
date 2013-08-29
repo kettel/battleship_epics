@@ -38,15 +38,4 @@ public class HighscoreEntry implements Comparable<HighscoreEntry>{
 		// higher position than newer, in case of the same nofTurns
 		return (lastCmp != 0 ? lastCmp : timestamp.compareTo(o.timestamp));
 	}
-	
-	public boolean equals(Object o) {
-        if (!(o instanceof HighscoreEntry))
-            return false;
-        HighscoreEntry n = (HighscoreEntry) o;
-        return n.timestamp.equals(timestamp) && n.nofTurns.equals(nofTurns);
-    }
-
-    public int hashCode() {
-        return 31*timestamp.hashCode() + nofTurns.hashCode() + alias.hashCode();
-    }
 }
