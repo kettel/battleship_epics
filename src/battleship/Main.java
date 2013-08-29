@@ -3,29 +3,26 @@ package battleship;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
-import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 
 /*
  * Minimum:
  * TODO: Comment. Oh THE COMMENT!
  *  
- * TODO: Make the game follow teh rulez
+ * [X] Make the game follow teh rulez
  * [X] boats at least placed 1 square away from each other - fixed for human and computer alike
  * 	[X] Create a way to compare two coordinates
  * 		*** Created the isCoordinate (better name?) functions in coordinate ***
  * 
- * TODO: super: Player
+ * [X] super: Player
  * [X] draw board for players
  * [X] MakeMove - a super one - should probably be the same for both human and computer
  * 		***works for the human player***
@@ -33,55 +30,30 @@ import java.util.TreeMap;
  * 
  * 
  * 
- * TODO: Human Player:
+ * [X] Human Player:
  *	[X] Draw player entered ship on board.
  * 	[X]: Make a move
   	* 	[X] Handle collisions (if we with collision meant "the same player hitting on the same square twice" or something like that)
  * 		[X] Basic textinput (x,y)
  * 			[X] incorrect input should be fixed
- * 			(TODO: Advanced placement w keyarrows)
  * 
- * TODO: Computer player.
+ * [X] Computer player.
  * 	[X] Place ships (random)
  * 
- * 	TODO: Make a move (pure random, peeking or something with memory?)
+ * 	[X] Make a move (pure random, peeking or something with memory?)
  * 		[X] random
  * 
  * [X] Create a functioning game-loop (not over internet)
  * 		***should probably not be a static thing. Alpha down below in main.
  * 		***should it be it's own object/class or something?
  * 
- * TODO: Determine winner.
- * TODO: Count misses
- * TODO: Count hits.
- * 	(Keep track of number of # hits and # turns? )
+ * [X] Determine winner.
+ * [X] Count misses
+ * [X] Count hits.
  * 
  * TODO: Design
  *	TODO: Make UML
  * 
- * 
- * If time allows for it:
- * TODO: more rules? OwO
- * 		alternatives:
- * 		[ ] you may fire once per ship in your fleet that has yet to be damaged, or once if all ship has been damaged
- * 		[ ] may fire once per unsunk ship
- * 		[ ] may fire three times per turn, but may not know what shot hit what (like "you fired at (0,0),(1,1),(2,2). You had 2 hits and 1 miss")
- * 		[ ] if you sink a ship you may fire again
- * 
- * [X] Add support for more shiptypes <- begun
- *	***can choose a different fleet***
- *	[X] display all the ships in the active fleet
- *	[X] create own fleet
- * 
- * 
- * TODO: Network-play !!! Will probably have to rewrite a lot !!!
- * TODO: Highscore
- * 	TODO: Store permanently on file.
- * 		TODO: Encryption
- * 			TODO: Store on server. SSL. Mums!
- * TODO: Graphics
- * 	TODO: Tweak the drawing of game board for better placements.
-
  */
 
 
@@ -226,7 +198,6 @@ public class Main {
 	 * print the logo
 	 */
 	private static void printLogo() {
-		// TODO Auto-generated method stub
 		System.out.println("  ____        _   _   _      ____  _     _       ");
 		System.out.println(" | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __  ");
 		System.out.println(" |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\ ");
@@ -269,7 +240,6 @@ public class Main {
 	 * print a message to the user if the input is incorrect
 	 */
 	private static void printNumberInputError() {
-		// TODO Auto-generated method stub
 		System.out.println("Du måste ange ett giltigt nummer, var god försök igen.");
 	}
 	
@@ -277,7 +247,6 @@ public class Main {
 	 * function to change the source-file and thereby change the fleet used in the game
 	 */
 	private static void chooseFleet() {
-		// TODO Auto-generated method stub
 		System.out.println("Valbara flottor:");
 		@SuppressWarnings("resource")
 		Scanner stringScanner = new Scanner(System.in);
@@ -300,7 +269,6 @@ public class Main {
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 	
@@ -352,11 +320,11 @@ public class Main {
 	/**
 	 * Show the ship in the current active fleet.
 	 */
+	@SuppressWarnings("resource")
 	private static void showFleet(){
 		try {
 			//create reader
 			BufferedReader in = new BufferedReader(new FileReader(source)); 
-			
 			while(!in.ready()){
 				//wait until reader is ready.
 			}
@@ -505,5 +473,4 @@ public class Main {
 		
 		new GameLoop(size, player1, player2);
 	}
-	
 }

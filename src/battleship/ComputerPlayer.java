@@ -1,9 +1,6 @@
 
 package battleship;
 
-import java.util.HashSet;
-import battleship.Player.FleetType;
-
 /**
  * Computer player. Should mainly be concerned with generating coordinates for where to put ships and where to shoot. 
  * @author Victor, Wiktor

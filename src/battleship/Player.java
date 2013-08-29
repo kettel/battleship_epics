@@ -70,10 +70,8 @@ public abstract class Player {
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -142,31 +140,6 @@ public abstract class Player {
 			}
 			return true;
 		}
-		return false;
-	}
-	
-	/**
-	 * Compares the coordinate of the shot with the coordinates of all ships.
-	 * @param Coordinate c - the coordinate 
-	 * @return weather the shot hit a ship or not.
-	 */
-	private boolean checkIfIsHit(Coordinate c){ //TODO: seems to be unused
-		
-		//For all ships in fleet
-		for (Integer[] ship : fleet.keySet()) {
-			//Check if any coordinate in ship is the given coordinate
-			for(Coordinate coordinate : fleet.get(ship)){
-				if(c.isCoordinate(coordinate)){
-					return true;
-				}
-			}
-			/*
-			if (fleet.get(ship).contains(c)){
-				return true;
-			}
-			*/	
-		}
-		//If the coordinate is not in any ship in the fleet
 		return false;
 	}
 	

@@ -1,6 +1,5 @@
 package battleship;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -9,10 +8,6 @@ import java.util.Scanner;
  *
  */
 public class HumanPlayer extends Player {
-	//these:
-	private static int VERTICAL = 0;
-	private static int HORIZONTAL = 1;
-	//unused
 	
 	//Loop-booleans
 	boolean isPlaced; //boolean that is used to determine if the placement of a ship is valid.

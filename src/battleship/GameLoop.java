@@ -2,21 +2,14 @@ package battleship;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.Map.Entry;
-
 
 /**
  * Class with functions 
@@ -104,9 +97,7 @@ public class GameLoop {
 			}
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("highscore.txt hittades inte. Skapar filen.");
-			//e.printStackTrace();
 		}
 	}
 

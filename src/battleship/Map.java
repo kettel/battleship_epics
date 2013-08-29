@@ -22,22 +22,10 @@ public class Map {
 	private char[][] map;
 	
 	/**
-	 * TODO: Is/Should this be used for something?
-	 * @author Victor,Wiktor
-	 *
-	 */
-	public static class MapSize {
-		public static int LARGE = 10;
-		public static int MEDIUM = 5;
-		public static int SMALL = 2;
-	}
-
-	/**
 	 * Constructor
 	 * @param size
 	 */
 	public Map(int size) {
-		super(); //<--TODO: needed? 
 		map = createMap(size);
 		
 	}
@@ -288,6 +276,6 @@ public class Map {
 		}		
 		
 		else
-			map[x][y] = 'E';//TODO: should not happen... throw error?
+			map[x][y] = 'E';
 	}
 }
