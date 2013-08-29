@@ -56,7 +56,7 @@ public class GameLoop {
 		System.out.println("Det tog "+ turn+" omgångar!");
 		
 		
-		// If winner is human, print to highscore	
+		// If winner is human, print to highscore if score is good enough	
 		//if(winner.isHuman()){
 			checkHighscore(winner.getAlias(), turn);
 		//}
@@ -64,9 +64,14 @@ public class GameLoop {
 		//After game: highscore time :D
 	}
 	
+	/**
+	 * Check current highscore to determine whether current score is good enough for top 10
+	 * @param winnerAlias - name of current winner 
+	 * @param nofTurns - score, that is, number of turns it took to win
+	 */
 	private void checkHighscore(String winnerAlias, int nofTurns){
 		ArrayList<HighscoreEntry> currentHighscore = readHighscore();
-		if(currentHighscore.isEmpty()){
+		if(currentHighscore.isEmpty() || currentHighscore.size() < 11){
 			currentHighscore.add(new HighscoreEntry(winnerAlias, nofTurns, System.currentTimeMillis()));
 			Collections.sort(currentHighscore);
 			printToHighscore(currentHighscore);
@@ -80,6 +85,10 @@ public class GameLoop {
 		}
 	}
 	
+	/**
+	 * Print ArrayList highscore to file
+	 * @param highscore
+	 */
 	private void printToHighscore(ArrayList<HighscoreEntry> highscore) {
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("highscore.txt", false)));
@@ -94,12 +103,17 @@ public class GameLoop {
 				
 			}
 			writer.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("highscore.txt hittades inte. Skapar filen.");
+			//e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Read current highscore file, and return it as an ordered ArrayList
+	 * @return the highscore
+	 */
 	public ArrayList<HighscoreEntry> readHighscore(){
 		ArrayList<HighscoreEntry> highscore = new ArrayList<HighscoreEntry>();
 		try {
@@ -115,8 +129,8 @@ public class GameLoop {
 			Collections.sort(highscore);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// No highscore found, will be created
+			System.out.println("Skapar en ny highscore.txt...");
 		}
 		return highscore;
 	}

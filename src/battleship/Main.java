@@ -186,8 +186,8 @@ public class Main {
 							i++;
 						}
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						// No current highscore could be found
+						System.out.println("Hittade ingen highscore.txt. Starta ett nytt spel för att skapa en!");
 					}
 					
 					break;
