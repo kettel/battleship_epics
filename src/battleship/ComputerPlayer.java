@@ -39,7 +39,6 @@ public class ComputerPlayer extends Player {
 				isPlaced=checkAndPlace(map, ship, startCoordinate, orientation);
 			}
 		}
-		map.drawSetupMap();
 	}
 
 

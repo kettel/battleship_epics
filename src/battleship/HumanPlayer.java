@@ -47,9 +47,10 @@ public class HumanPlayer extends Player {
 	
 	@Override
 	public void placeShips(Map map) {
-		
+		System.out.println(getAlias() + " det är din tur att placera ut skepp!");
 		//place all the ships in the fleet
 		for (Integer[] ship : fleet.keySet()) {
+			map.drawSetupMap();
 			isPlaced=false;
 			// while the ship is not placed in a valid way
 			while(isPlaced == false){
@@ -72,8 +73,10 @@ public class HumanPlayer extends Player {
 					System.out.println("input error1 - please try again\n");
 				}
 			}
-			map.drawSetupMap();
 		}	
+		System.out.println("Tryck på enter för att fortsätta.");
+		scanner.nextLine();
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
 
 	@Override

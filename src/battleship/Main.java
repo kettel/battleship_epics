@@ -89,7 +89,7 @@ import java.util.TreeMap;
  * Battleship, the game based on the movie with the same name.
  * To create your own fleet to use add a new file in the BattleShip directory containing the lengths of all ships you want to use separated by commas
  * (For example: a file containing "1,1,1,2,2,3,4,5" will create a fleet of 3 ships with length 1, two ships with length 2 and one ship each of length 3,4 and 5)
- * 
+ * I you want to use a different fleet on startup, change the sourcestring to your Fleet of choice
  * @author Victor,Wiktor
  *
  */
@@ -195,9 +195,7 @@ public class Main {
 				case 7://start game
 					// Non-interactive way of starting the game. Just does not care about 
 					// menu-options..
-					Player player1 = new ComputerPlayer(size,"HAL",source);
-					Player player2 = new ComputerPlayer(size,"BMO",source);
-					new GameLoop(size, player1, player2);
+					setupGame();
 					break;
 					
 				case 8://define fleet
@@ -362,17 +360,9 @@ public class Main {
 			while(!in.ready()){
 				//wait until reader is ready.
 			}
-			//import the first line and split it
+			//import the first line
 			String importString =in.readLine();
-			String[] importFleet = importString.split(",");
-			
-			//for every ship-type in the "split string"
-			for (int i = 0; i < importFleet.length; i++) {
-				 for (int j = 0; j < Integer.parseInt(importFleet[i]); j++) {
-					 System.out.print('#');					
-				}
-				 System.out.println();
-			}
+			printFleetFromString(importString);
 		} catch(Exception e){
 			//should not happen
 		}
@@ -389,9 +379,9 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		while(true){
 			try {
-				System.out.println("Hur lång vill du att skeppstypen skall vara? För att avsluta, tryck på enter utan att skriva i något.");
+				System.out.println("Hur lång vill du att skeppstypen skall vara? För att avsluta, skriv in 0 eller ingenting alls och tryck på enter.");
 				input = scanner.nextLine();
-				if (input.equals("")) {
+				if (input.equals("")||input.equals("0")) {
 					break;
 				}else{
 					lenght = Integer.parseInt(input);
@@ -408,38 +398,34 @@ public class Main {
 					System.out.println("Endast siffror!");
 				}
 			}
-		if(createdFleet.length()>0){
-			createdFleet = createdFleet.substring(0, createdFleet.length()-1);
-		}
-		System.out.println();
-		System.out.println("Flottan ser ut på följande sätt:");
-		String[] createdFleetArray = createdFleet.split(",");
-		for (int i = 0; i < createdFleetArray.length; i++) {
-			 for (int j = 0; j < Integer.parseInt(createdFleetArray[i]); j++) {
-				 System.out.print('#');					
-			}
-			 System.out.println();
-		}
-		printCreateFleetMenu();
-		boolean quit = false;
-		int inNumber;
-		while(!quit){
-			inNumber = scanner.nextInt();
+		if(!createdFleet.equals("")){ //If fleet is NOT empty: continue, else quit
+			createdFleet = createdFleet.substring(0, createdFleet.length()-1); //remove last sign in createdFleet = the last comma
+			System.out.println();
+			System.out.println("Flottan ser ut på följande sätt:");
+			printFleetFromString(createdFleet);
 			
-			switch (inNumber) {
-			case 1:
-				quit = true;
-				createFleet(); //create a new fleet
-				break;
-			case 2:
-				saveFleet(createdFleet,scanner);
-			case 3:
-				quit = true;
-				break;
-			default:
-				break;
+			printCreateFleetMenu();
+			boolean quit = false;
+			int inNumber;
+			
+			while(!quit){
+				inNumber = scanner.nextInt();
+				
+				switch (inNumber) {
+				case 1:
+					quit = true;
+					createFleet(); //create a new fleet
+					break;
+				case 2:
+					saveFleet(createdFleet,scanner); //save fleet
+				case 3:
+					quit = true; //quit the entire thing
+					break;
+				default:
+					break;
+					}
 				}
-			}
+			}		
 		}
 
 	/**
@@ -461,7 +447,63 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * take in a string (of ints separeted by commas) as an argument and prints a fleet-representation of the string with #
+	 * @param createdFleet
+	 */
+	private static void printFleetFromString(String createdFleet){
+		//split the input up in an array for easy printing
+		String[] createdFleetArray = createdFleet.split(",");
+		
+		for (int i = 0; i < createdFleetArray.length; i++) {//for each ship in fleet
+			 for (int j = 0; j < Integer.parseInt(createdFleetArray[i]); j++) { //for each "ship part" of ship
+				 System.out.print('#');
+			}
+			 System.out.println();
+		}
+	}
 	
+	/**
+	 * Creats the players and, if they're human, allow the player to name them. Then start the game.
+	 */
+	private static void setupGame() {
+		Player player1;
+		Player player2;
+		String alias = null;
+		Scanner stringScanner;
+		switch (nofHumanPlayers) {
+		case 0://2 computer
+			System.out.println("Skapar ett spel med två datorspelare");
+			player1 = new ComputerPlayer(size,"HAL",source);
+			player2 = new ComputerPlayer(size,"BMO",source);
+			break;
+		case 1: //1 computer, 1 human
+			System.out.println("Skapar ett spel med en människa och datorspelare");
+			stringScanner = new Scanner(System.in);
+			System.out.println("Skriv in namnet på spelare ett");
+			alias = stringScanner.nextLine();
+			player1 = new HumanPlayer(size, alias, source);
+			player2 = new ComputerPlayer(size,"HAL",source);
+			break;
+		case 2: //2 human
+			System.out.println("Skapar ett spel med två människor.");
+			stringScanner = new Scanner(System.in);
+			System.out.println("Skriv in namnet på spelare ett");
+			alias = stringScanner.nextLine();
+			player1 = new HumanPlayer(size, alias, source);
+			System.out.println("Skriv in namnet på spelare två");
+			alias = stringScanner.nextLine();
+			player2 = new HumanPlayer(size, alias, source);
+			break;
+
+		default: //else
+			player1 = new ComputerPlayer(size,"HAL",source);
+			player2 = new ComputerPlayer(size,"BMO",source);
+			break;
+		}
+		
+		new GameLoop(size, player1, player2);
 	}
 	
 }
